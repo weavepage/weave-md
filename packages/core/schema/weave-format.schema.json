@@ -1,0 +1,324 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://weave-md.org/schema/weave-format.schema.json",
+  "title": "Weave Format Schema",
+  "description": "Schema definition for Weave format elements including blocks, inlines, and extended syntax",
+  "definitions": {
+    "ImageBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "image"
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alt": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "width": {
+          "type": "string",
+          "enum": ["normal", "wide", "full"]
+        }
+      },
+      "required": ["type", "file"]
+    },
+    "GalleryBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "gallery"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "alt": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "files"]
+    },
+    "AudioBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "audio"
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "autoplay": {
+          "type": "boolean",
+          "default": false
+        },
+        "controls": {
+          "type": "boolean",
+          "default": true
+        },
+        "loop": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": ["type", "file"]
+    },
+    "VideoBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "video"
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "poster": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0
+        },
+        "autoplay": {
+          "type": "boolean",
+          "default": false
+        },
+        "controls": {
+          "type": "boolean",
+          "default": true
+        },
+        "loop": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": ["type", "file"]
+    },
+    "EmbedBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "embed"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["type", "url"]
+    },
+    "VoiceoverBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "voiceover"
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["type", "file"]
+    },
+    "MathBlock": {
+      "type": "object",
+      "description": "Block math using ```math fenced code block",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "math"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "content"]
+    },
+    "InlineMath": {
+      "type": "object",
+      "description": "Inline math using :math[...] syntax",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "inlineMath"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "content"]
+    },
+    "PreBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "pre"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "content"]
+    },
+    "Strikethrough": {
+      "type": "object",
+      "description": "Inline strikethrough text using ~~text~~ syntax",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "strikethrough"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "content"]
+    },
+    "TableCell": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "align": {
+          "type": "string",
+          "enum": ["left", "center", "right"],
+          "description": "Cell alignment inherited from column definition"
+        }
+      },
+      "required": ["content"]
+    },
+    "TableRow": {
+      "type": "object",
+      "properties": {
+        "cells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableCell"
+          }
+        }
+      },
+      "required": ["cells"]
+    },
+    "Table": {
+      "type": "object",
+      "description": "GFM-style table with headers and optional column alignment",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "table"
+        },
+        "header": {
+          "$ref": "#/definitions/TableRow",
+          "description": "Header row defining column names"
+        },
+        "align": {
+          "type": "array",
+          "items": {
+            "type": ["string", "null"],
+            "enum": ["left", "center", "right", null]
+          },
+          "description": "Column alignments from the delimiter row"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableRow"
+          },
+          "description": "Data rows"
+        }
+      },
+      "required": ["type", "header", "rows"]
+    },
+    "AutolinkLiteral": {
+      "type": "object",
+      "description": "Auto-linked URL or email address",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "autolink"
+        },
+        "linkType": {
+          "type": "string",
+          "enum": ["url", "email"],
+          "description": "Whether this is a URL or email autolink"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Present when linkType is 'url'"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Present when linkType is 'email'"
+        }
+      },
+      "required": ["type", "linkType"],
+      "allOf": [
+        {
+          "if": {
+            "properties": { "linkType": { "const": "url" } },
+            "required": ["linkType"]
+          },
+          "then": {
+            "required": ["url"],
+            "not": { "required": ["email"] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "linkType": { "const": "email" } },
+            "required": ["linkType"]
+          },
+          "then": {
+            "required": ["email"],
+            "not": { "required": ["url"] }
+          }
+        }
+      ]
+    },
+    "ExtendedBlock": {
+      "oneOf": [
+        { "$ref": "#/definitions/ImageBlock" },
+        { "$ref": "#/definitions/GalleryBlock" },
+        { "$ref": "#/definitions/AudioBlock" },
+        { "$ref": "#/definitions/VideoBlock" },
+        { "$ref": "#/definitions/EmbedBlock" },
+        { "$ref": "#/definitions/VoiceoverBlock" },
+        { "$ref": "#/definitions/MathBlock" },
+        { "$ref": "#/definitions/PreBlock" },
+        { "$ref": "#/definitions/Table" }
+      ]
+    },
+    "ExtendedInline": {
+      "oneOf": [
+        { "$ref": "#/definitions/Strikethrough" },
+        { "$ref": "#/definitions/AutolinkLiteral" },
+        { "$ref": "#/definitions/InlineMath" }
+      ]
+    }
+  }
+}

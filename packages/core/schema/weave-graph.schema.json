@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://weave-md.org/schema/weave-graph.schema.json",
+  "title": "Weave Graph",
+  "description": "Graph representation of node references in a Weave document",
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/GraphNode"
+      }
+    },
+    "occurrences": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "https://weave-md.org/schema/weave-ast.schema.json#/definitions/Link"
+        }
+      }
+    }
+  },
+  "required": ["nodes", "occurrences"],
+  "definitions": {
+    "GraphNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outgoing": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Map of target node IDs to occurrence counts"
+        },
+        "incoming": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Map of source node IDs to occurrence counts"
+        }
+      },
+      "required": ["id", "outgoing", "incoming"]
+    }
+  }
+}
