@@ -60,33 +60,3 @@ export type ExtendedBlock =
   | VoiceoverBlock 
   | MathBlock 
   | PreBlock;
-
-// why do we have duplicate types here? is this intentionally separated?
-export interface ExtendedWeaveDocAst {
-  sections: Array<{
-    id: string;
-    title?: string;
-    peek?: string;
-    body: string;
-    filePath?: string;
-    extendedBlocks?: ExtendedBlock[];
-  }>;
-  links: Array<{
-    ref: {
-      id: string;
-      display?: 'footnote' | 'sidenote' | 'margin' | 'overlay' | 'inline' | 'stretch' | 'page';
-      export?: 'appendix' | 'inline' | 'omit';
-      params?: Record<string, string>;
-    };
-    sourceId: string;
-    start: {
-      line: number;
-      character: number;
-    };
-    end: {
-      line: number;
-      character: number;
-    };
-    text?: string;
-  }>;
-}
