@@ -99,6 +99,8 @@ The formula :math[E = mc^2] shows the relationship.
 
 All media elements use YAML structure inside fenced code blocks to specify their properties. Required fields must be present for valid parsing, while optional fields provide additional configuration.
 
+**Unknown Fields**: Implementations MUST preserve unknown YAML fields in media blocks. This allows renderer-specific extensions and custom configuration without breaking conformance. Implementations MAY emit info-level messages for unknown fields.
+
 ### Image
 
 Display a single image with optional caption and layout metadata:
@@ -115,7 +117,7 @@ Image Fields:
 - `file` (required) — Image URL or file reference
 - `alt` — Alternative text for accessibility (optional)
 - `caption` — Caption displayed with the image (optional)
-- `width` — Display width (normal, wide, full) (optional)
+- `width` — Display width hint (optional). Common values include `normal`, `wide`, `full`, but implementations MAY accept any string value.
 
 Behavior:
 - Renders as a semantic image block

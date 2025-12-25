@@ -26,7 +26,8 @@
           "enum": ["normal", "wide", "full"]
         }
       },
-      "required": ["type", "file"]
+      "required": ["type", "file"],
+      "additionalProperties": true
     },
     "GalleryBlock": {
       "type": "object",
@@ -50,7 +51,8 @@
           "type": "string"
         }
       },
-      "required": ["type", "files"]
+      "required": ["type", "files"],
+      "additionalProperties": true
     },
     "AudioBlock": {
       "type": "object",
@@ -76,7 +78,8 @@
           "default": false
         }
       },
-      "required": ["type", "file"]
+      "required": ["type", "file"],
+      "additionalProperties": true
     },
     "VideoBlock": {
       "type": "object",
@@ -111,7 +114,8 @@
           "default": false
         }
       },
-      "required": ["type", "file"]
+      "required": ["type", "file"],
+      "additionalProperties": true
     },
     "EmbedBlock": {
       "type": "object",
@@ -125,7 +129,8 @@
           "format": "uri"
         }
       },
-      "required": ["type", "url"]
+      "required": ["type", "url"],
+      "additionalProperties": true
     },
     "VoiceoverBlock": {
       "type": "object",
@@ -139,7 +144,8 @@
           "minLength": 1
         }
       },
-      "required": ["type", "file"]
+      "required": ["type", "file"],
+      "additionalProperties": true
     },
     "MathBlock": {
       "type": "object",

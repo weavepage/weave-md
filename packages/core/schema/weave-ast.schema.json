@@ -37,7 +37,8 @@
           "type": "string"
         },
         "filePath": {
-          "type": "string"
+          "type": "string",
+          "description": "Source file path. Used in workspace-level parsing to track which file contains this section."
         },
         "extendedBlocks": {
           "type": "array",
@@ -83,14 +84,14 @@
         },
         "text": {
           "type": "string",
-          "description": "The link text, if any"
+          "description": "The link text content. Empty string for anchor-only references (whitespace-only brackets like [ ], [  ], etc. are normalized to empty string)."
         },
         "sourceId": {
           "type": "string",
           "description": "ID of the section containing this link"
         }
       },
-      "required": ["ref", "sourceId", "start", "end"]
+      "required": ["ref", "sourceId", "start", "end", "text"]
     },
     "NodeRef": {
       "type": "object",
@@ -106,13 +107,13 @@
         "export": {
           "type": "string",
           "enum": ["appendix", "inline", "omit"]
-        },
-        "params": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
+      },
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "boolean" }
+        ]
       },
       "required": ["id"]
     }

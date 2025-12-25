@@ -1,5 +1,5 @@
 import { Diagnostic } from '@weave-md/core';
-import { isEscaped, findClosingBracket } from '../links';
+import { isEscaped, findClosingBracket } from '../links/index.js';
 
 export function validateInlineSyntax(markdown: string, filePath?: string): Diagnostic[] {
   const diagnostics: Diagnostic[] = [];
