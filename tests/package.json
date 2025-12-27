@@ -1,0 +1,20 @@
+{
+  "name": "tests",
+  "version": "0.0.1",
+  "description": "Internal tests for weave-md",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@weave-md/basic": "file:../packages/basic",
+    "@weave-md/core": "file:../packages/core",
+    "@weave-md/parse": "file:../packages/parse",
+    "@weave-md/validate": "file:../packages/validate"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "vitest": "^4.0.16"
+  }
+}

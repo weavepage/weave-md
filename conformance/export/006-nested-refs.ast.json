@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "id": "nested-main",
+      "title": "Nested References Test",
+      "body": "Main section references [A](node:nested-a).\n\nSection A references B, and B references C.\n\nShould the appendix include all transitively referenced sections, or only direct references?\n\nThis test documents the expected behavior."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "nested-a"
+      },
+      "text": "A",
+      "sourceId": "nested-main"
+    }
+  ]
+}

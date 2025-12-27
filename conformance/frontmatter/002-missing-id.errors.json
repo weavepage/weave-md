@@ -1,0 +1,11 @@
+{
+  "errors": [
+    {
+      "type": "missing_required_field",
+      "field": "id",
+      "severity": "error",
+      "message": "Section frontmatter must include an 'id' field",
+      "filePath": "002-missing-id.md"
+    }
+  ]
+}

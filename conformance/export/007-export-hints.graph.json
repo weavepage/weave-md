@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "export-hints-test": {
+      "outgoing": {
+        "section-a": 1,
+        "section-b": 1,
+        "section-c": 1,
+        "section-d": 1,
+        "section-e": 1
+      },
+      "incoming": {}
+    },
+    "section-a": {
+      "outgoing": {},
+      "incoming": {
+        "export-hints-test": 1
+      }
+    },
+    "section-b": {
+      "outgoing": {},
+      "incoming": {
+        "export-hints-test": 1
+      }
+    },
+    "section-c": {
+      "outgoing": {},
+      "incoming": {
+        "export-hints-test": 1
+      }
+    },
+    "section-d": {
+      "outgoing": {},
+      "incoming": {
+        "export-hints-test": 1
+      }
+    },
+    "section-e": {
+      "outgoing": {},
+      "incoming": {
+        "export-hints-test": 1
+      }
+    }
+  }
+}

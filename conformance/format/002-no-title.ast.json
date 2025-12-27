@@ -1,0 +1,9 @@
+{
+  "sections": [
+    {
+      "id": "no-title-doc",
+      "body": "This document has no title field, which should be valid (title is optional)."
+    }
+  ],
+  "links": []
+}

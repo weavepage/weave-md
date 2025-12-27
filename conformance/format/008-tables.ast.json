@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "tables-test",
+      "title": "Tables Test",
+      "body": "A simple table:\n\n| Header 1 | Header 2 | Header 3 |\n|----------|----------|----------|\n| Cell 1   | Cell 2   | Cell 3   |\n| Cell 4   | Cell 5   | Cell 6   |\n\nTable with alignment:\n\n| Left | Center | Right |\n|:-----|:------:|------:|\n| L1   | C1     | R1    |\n| L2   | C2     | R2    |"
+    }
+  ],
+  "links": []
+}

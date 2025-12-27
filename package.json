@@ -2,15 +2,16 @@
   "name": "weave-md",
   "version": "0.0.1-alpha.0",
   "description": "Markdown flavor for inline, expandable references",
+  "type": "module",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
-    "conformance:core": "node dev-tools/fixture-runner/index.js --mode core",
-    "conformance:basic": "node dev-tools/fixture-runner/index.js --mode basic",
-    "validate:spec": "node dev-tools/validate-spec/index.js"
+    "test": "vitest run",
+    "test:validate": "vitest run conformance.validate",
+    "test:parse": "vitest run conformance.parse"
   },
   "keywords": [
     "markdown",
@@ -24,6 +25,7 @@
     "url": "https://github.com/weavepage/weave-md.git"
   },
   "devDependencies": {
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vitest": "^4.0.16"
   }
 }

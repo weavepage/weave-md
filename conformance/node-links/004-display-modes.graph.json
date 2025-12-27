@@ -1,0 +1,10 @@
+{
+  "nodes": {
+    "display-modes-test": {
+      "outgoing": {
+        "target": 7
+      },
+      "incoming": {}
+    }
+  }
+}

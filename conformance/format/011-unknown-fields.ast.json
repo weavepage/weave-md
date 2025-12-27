@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "unknown-fields-test",
+      "title": "Unknown Fields Test",
+      "body": "Image with unknown custom fields (should be preserved):\n\n```image\nfile: /photos/custom.jpg\nalt: Testing unknown field preservation\ncustomField: custom value\nrenderHint: special\nmetadata: { key: value }\n```\n\nVideo with unknown fields:\n\n```video\nfile: /video/custom.mp4\ncustomQuality: 4k\ncustomCodec: h265\ncustomMetadata: preserved\n```"
+    }
+  ],
+  "links": []
+}

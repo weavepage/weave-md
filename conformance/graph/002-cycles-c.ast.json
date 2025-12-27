@@ -1,0 +1,25 @@
+{
+  "sections": [
+    {
+      "id": "cycle-c",
+      "title": "Cycle Detection Test C",
+      "body": "This section completes the cycle by referencing [A](node:cycle-a).\n\nIt also references [B](node:cycle-b) creating a smaller cycle."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "cycle-a"
+      },
+      "text": "A",
+      "sourceId": "cycle-c"
+    },
+    {
+      "ref": {
+        "id": "cycle-b"
+      },
+      "text": "B",
+      "sourceId": "cycle-c"
+    }
+  ]
+}

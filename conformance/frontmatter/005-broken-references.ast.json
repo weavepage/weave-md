@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "id": "broken-refs",
+      "title": "Section with Broken References",
+      "body": "This section references nodes that don't exist:\n\n- [Missing section](node:does-not-exist)\n- [Another missing](node:also-missing)\n- [Valid reference](node:broken-refs) (self-reference, should work)\n- [Another broken](node:nonexistent)"
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "does-not-exist"
+      },
+      "text": "Missing section",
+      "sourceId": "broken-refs"
+    },
+    {
+      "ref": {
+        "id": "also-missing"
+      },
+      "text": "Another missing",
+      "sourceId": "broken-refs"
+    },
+    {
+      "ref": {
+        "id": "broken-refs"
+      },
+      "text": "Valid reference",
+      "sourceId": "broken-refs"
+    },
+    {
+      "ref": {
+        "id": "nonexistent"
+      },
+      "text": "Another broken",
+      "sourceId": "broken-refs"
+    }
+  ]
+}

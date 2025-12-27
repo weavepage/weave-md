@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "id": "deep-1",
+      "title": "Deep Cycle Test - Level 1",
+      "body": "Start of a deep reference chain. References [level 2](node:deep-2)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "deep-2"
+      },
+      "text": "level 2",
+      "sourceId": "deep-1"
+    }
+  ]
+}

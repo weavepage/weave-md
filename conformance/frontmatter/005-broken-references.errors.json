@@ -1,0 +1,28 @@
+{
+  "errors": [
+    {
+      "type": "broken_reference",
+      "sourceId": "broken-refs",
+      "targetId": "does-not-exist",
+      "severity": "error",
+      "message": "Reference to non-existent section 'does-not-exist'",
+      "filePath": "005-broken-references.md"
+    },
+    {
+      "type": "broken_reference",
+      "sourceId": "broken-refs",
+      "targetId": "also-missing",
+      "severity": "error",
+      "message": "Reference to non-existent section 'also-missing'",
+      "filePath": "005-broken-references.md"
+    },
+    {
+      "type": "broken_reference",
+      "sourceId": "broken-refs",
+      "targetId": "nonexistent",
+      "severity": "error",
+      "message": "Reference to non-existent section 'nonexistent'",
+      "filePath": "005-broken-references.md"
+    }
+  ]
+}

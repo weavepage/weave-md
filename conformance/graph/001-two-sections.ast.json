@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "id": "section-a",
+      "title": "Section A",
+      "body": "This is section A. It links to [Section B](node:section-b).\n\nThis is section B. It links back to [Section A](node:section-a) and also to [itself](node:section-b)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "section-b"
+      },
+      "text": "Section B",
+      "sourceId": "section-a"
+    },
+    {
+      "ref": {
+        "id": "section-a"
+      },
+      "text": "Section A",
+      "sourceId": "section-a"
+    },
+    {
+      "ref": {
+        "id": "section-b"
+      },
+      "text": "itself",
+      "sourceId": "section-a"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "section-a": {
+      "outgoing": { "section-b": 2, "section-a": 1 },
+      "incoming": { "section-a": 1 }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "sections": [
+    {
+      "id": "main-content",
+      "title": "Main Content",
+      "body": "This is the main content. It references [Section One](node:section-one?export=appendix) and [Section Two](node:section-two?export=appendix)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "section-one",
+        "export": "appendix"
+      },
+      "text": "Section One",
+      "sourceId": "main-content"
+    },
+    {
+      "ref": {
+        "id": "section-two",
+        "export": "appendix"
+      },
+      "text": "Section Two",
+      "sourceId": "main-content"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "preformatted-test",
+      "title": "Preformatted Block Test",
+      "body": "A preformatted block preserves spacing:\n\n```pre\nColumn A    Column B    Column C\n  1           2           3\n  10          20          30\n```\n\nASCII art example:\n\n```pre\n  /\\\n /  \\\n/____\\\n```"
+    }
+  ],
+  "links": []
+}

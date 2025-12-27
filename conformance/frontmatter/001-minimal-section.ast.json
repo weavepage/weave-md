@@ -1,0 +1,9 @@
+{
+  "sections": [
+    {
+      "id": "minimal-test",
+      "body": "This is a minimal section with only an ID."
+    }
+  ],
+  "links": []
+}

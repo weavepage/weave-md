@@ -1,0 +1,67 @@
+{
+  "sections": [
+    {
+      "id": "rewrite-test",
+      "title": "Link Rewriting Test",
+      "body": "Test various link rewriting scenarios:\n\n## Display params should be stripped\n- [Inline link](node:target?display=inline) → becomes simple anchor\n- [Footnote link](node:target?display=footnote) → becomes simple anchor\n- [Page link](node:target?display=page) → becomes simple anchor\n\n## Unknown params should be stripped\n- [With unknown param](node:target?unknown=value) → becomes simple anchor\n- [Multiple params](node:target?display=inline&custom=data) → becomes simple anchor\n\n## Link text preserved\n- [Custom label](node:target) → label preserved\n- [Another label](node:target?display=inline) → label preserved\n\n## Regular markdown links unchanged\n- [External link](https://example.com) → unchanged\n- [Relative link](./other.md) → unchanged\n- [Anchor link](#heading) → unchanged"
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "target",
+        "display": "inline"
+      },
+      "text": "Inline link",
+      "sourceId": "rewrite-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "display": "footnote"
+      },
+      "text": "Footnote link",
+      "sourceId": "rewrite-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "display": "page"
+      },
+      "text": "Page link",
+      "sourceId": "rewrite-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "unknown": "value"
+      },
+      "text": "With unknown param",
+      "sourceId": "rewrite-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "display": "inline",
+        "custom": "data"
+      },
+      "text": "Multiple params",
+      "sourceId": "rewrite-test"
+    },
+    {
+      "ref": {
+        "id": "target"
+      },
+      "text": "Custom label",
+      "sourceId": "rewrite-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "display": "inline"
+      },
+      "text": "Another label",
+      "sourceId": "rewrite-test"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "main-content": {
+      "outgoing": { "section-one": 1, "section-two": 1 },
+      "incoming": {}
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "test-basic-link": {
+      "outgoing": { "target-section": 1 },
+      "incoming": {}
+    }
+  }
+}

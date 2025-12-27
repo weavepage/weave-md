@@ -1,0 +1,10 @@
+{
+  "nodes": {
+    "unknown-fields-test": {
+      "outgoing": {
+        "target-section": 1
+      },
+      "incoming": {}
+    }
+  }
+}

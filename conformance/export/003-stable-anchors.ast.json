@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "id": "anchor-test",
+      "title": "Stable Anchor Test",
+      "body": "References to sections should use stable anchors:\n\n- [Simple ID](node:simple-id)\n- [ID with dashes](node:my-section-id)\n- [ID with numbers](node:section-123)\n- [Complex ID](node:complex_id-v2)\n\nAll node: links should be rewritten to #anchor format in export."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "simple-id"
+      },
+      "text": "Simple ID",
+      "sourceId": "anchor-test"
+    },
+    {
+      "ref": {
+        "id": "my-section-id"
+      },
+      "text": "ID with dashes",
+      "sourceId": "anchor-test"
+    },
+    {
+      "ref": {
+        "id": "section-123"
+      },
+      "text": "ID with numbers",
+      "sourceId": "anchor-test"
+    },
+    {
+      "ref": {
+        "id": "complex_id-v2"
+      },
+      "text": "Complex ID",
+      "sourceId": "anchor-test"
+    }
+  ]
+}

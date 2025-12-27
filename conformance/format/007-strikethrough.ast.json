@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "strikethrough-test",
+      "title": "Strikethrough Test",
+      "body": "This text has ~~strikethrough~~ formatting.\n\nMultiple ~~strikethrough~~ instances in ~~one~~ line.\n\n~~Entire line struck through~~"
+    }
+  ],
+  "links": []
+}

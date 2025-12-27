@@ -1,0 +1,25 @@
+{
+  "sections": [
+    {
+      "id": "deep-5",
+      "title": "Deep Cycle Test - Level 5",
+      "body": "End of chain - creates cycle back to [level 1](node:deep-1).\n\nAlso creates a shorter cycle back to [level 3](node:deep-3)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "deep-1"
+      },
+      "text": "level 1",
+      "sourceId": "deep-5"
+    },
+    {
+      "ref": {
+        "id": "deep-3"
+      },
+      "text": "level 3",
+      "sourceId": "deep-5"
+    }
+  ]
+}

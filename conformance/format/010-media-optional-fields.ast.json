@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "media-optional-fields-test",
+      "title": "Media Optional Fields Test",
+      "body": "Image with all optional fields:\n\n```image\nfile: /photos/full.jpg\nalt: Full example with all fields\ncaption: This image has all optional fields\nwidth: wide\n```\n\nGallery with optional fields:\n\n```gallery\nfiles:\n  - /photos/g1.jpg\n  - /photos/g2.jpg\n  - /photos/g3.jpg\nalt: Gallery alternative text\ncaption: Gallery caption text\n```\n\nAudio with all optional fields:\n\n```audio\nfile: /audio/full.mp3\nautoplay: true\ncontrols: false\nloop: true\n```\n\nVideo with all optional fields:\n\n```video\nfile: /video/full.mp4\nposter: /video/thumb.jpg\nstart: 30\nautoplay: true\ncontrols: false\nloop: true\n```"
+    }
+  ],
+  "links": []
+}

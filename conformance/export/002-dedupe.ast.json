@@ -1,0 +1,46 @@
+{
+  "sections": [
+    {
+      "id": "dedupe-main",
+      "title": "Deduplication Test Main",
+      "body": "This section references [shared](node:dedupe-shared) multiple times:\n- First reference: [shared section](node:dedupe-shared)\n- Second reference: [same section again](node:dedupe-shared)\n- Third reference: [shared](node:dedupe-shared)\n\nIt also references [another section](node:dedupe-other) that also references shared."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "dedupe-shared"
+      },
+      "text": "shared",
+      "sourceId": "dedupe-main"
+    },
+    {
+      "ref": {
+        "id": "dedupe-shared"
+      },
+      "text": "shared section",
+      "sourceId": "dedupe-main"
+    },
+    {
+      "ref": {
+        "id": "dedupe-shared"
+      },
+      "text": "same section again",
+      "sourceId": "dedupe-main"
+    },
+    {
+      "ref": {
+        "id": "dedupe-shared"
+      },
+      "text": "shared",
+      "sourceId": "dedupe-main"
+    },
+    {
+      "ref": {
+        "id": "dedupe-other"
+      },
+      "text": "another section",
+      "sourceId": "dedupe-main"
+    }
+  ]
+}

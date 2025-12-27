@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "target",
+      "title": "Target Section",
+      "body": "This is the target section for link rewriting tests."
+    }
+  ],
+  "links": []
+}

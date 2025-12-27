@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "id": "nested-b",
+      "title": "Section B",
+      "body": "Section B references [C](node:nested-c)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "nested-c"
+      },
+      "text": "C",
+      "sourceId": "nested-b"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "type": "duplicate_id",
+      "id": "duplicate-test",
+      "severity": "error",
+      "message": "Section ID 'duplicate-test' is used in multiple files",
+      "files": [
+        "003-duplicate-ids.md",
+        "003-duplicate-ids-2.md"
+      ]
+    }
+  ]
+}

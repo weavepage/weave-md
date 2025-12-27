@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "id": "test-basic-link",
+      "title": "Basic Node Link Test",
+      "body": "This section contains a basic [node link](node:target-section)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "target-section"
+      },
+      "text": "node link",
+      "sourceId": "test-basic-link"
+    }
+  ]
+}

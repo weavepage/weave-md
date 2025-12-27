@@ -1,0 +1,19 @@
+{
+  "sections": [
+    {
+      "id": "unknown-fields-test",
+      "title": "Unknown Frontmatter Fields Test",
+      "peek": "Testing unknown field handling",
+      "body": "This section has unknown frontmatter fields that should emit info-level messages but still parse successfully.\n\nThe section references [another section](node:target-section) to test node-links work with unknown fields."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "target-section"
+      },
+      "text": "another section",
+      "sourceId": "unknown-fields-test"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "nodes": {
+    "cycle-a": {
+      "outgoing": {
+        "cycle-b": 1,
+        "cycle-c": 1,
+        "cycle-a": 1
+      },
+      "incoming": {
+        "cycle-a": 1,
+        "cycle-b": 1,
+        "cycle-c": 1
+      }
+    },
+    "cycle-b": {
+      "outgoing": {
+        "cycle-c": 1,
+        "cycle-a": 1
+      },
+      "incoming": {
+        "cycle-a": 1,
+        "cycle-c": 1
+      }
+    },
+    "cycle-c": {
+      "outgoing": {
+        "cycle-a": 1,
+        "cycle-b": 1
+      },
+      "incoming": {
+        "cycle-a": 1,
+        "cycle-b": 1
+      }
+    }
+  }
+}

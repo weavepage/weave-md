@@ -22,6 +22,16 @@ export function parseNodeUrl(href: string): ParseNodeUrlResult {
     if (queryString) {
       const params = new URLSearchParams(queryString);
       
+      // Check for duplicate display parameters
+      if (params.getAll('display').length > 1) {
+        return { success: false, error: 'Multiple display parameters not allowed' };
+      }
+      
+      // Check for duplicate export parameters
+      if (params.getAll('export').length > 1) {
+        return { success: false, error: 'Multiple export parameters not allowed' };
+      }
+      
       const display = params.get('display');
       if (display) {
         if (['footnote', 'sidenote', 'margin', 'overlay', 'inline', 'stretch', 'page'].includes(display)) {
@@ -40,16 +50,13 @@ export function parseNodeUrl(href: string): ParseNodeUrlResult {
         }
       }
 
-      const otherParams: Record<string, string> = {};
+      // Spread unknown params directly onto ref (matches schema additionalProperties)
       params.forEach((value: string, key: string) => {
         if (key !== 'display' && key !== 'export') {
-          otherParams[key] = value;
+          // Empty string values are treated as boolean true
+          (ref as any)[key] = value === '' ? true : value;
         }
       });
-
-      if (Object.keys(otherParams).length > 0) {
-        ref.params = otherParams;
-      }
     }
 
     return { success: true, ref };
@@ -69,11 +76,18 @@ export function formatNodeUrl(ref: NodeRef): string {
     params.set('export', ref.export);
   }
 
-  if (ref.params) {
-    Object.entries(ref.params).forEach(([key, value]) => {
-      params.set(key, value);
-    });
-  }
+  // Handle unknown params spread directly on ref
+  const knownKeys = new Set(['id', 'display', 'export']);
+  Object.keys(ref).forEach(key => {
+    if (!knownKeys.has(key)) {
+      const value = ref[key];
+      if (typeof value === 'string') {
+        params.set(key, value);
+      } else if (value === true) {
+        params.set(key, '');
+      }
+    }
+  });
 
   const queryString = params.toString();
   return `node:${ref.id}${queryString ? `?${queryString}` : ''}`;

@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "id": "cycle-a",
+      "title": "Cycle Detection Test A",
+      "body": "This section references [B](node:cycle-b) and [C](node:cycle-c).\n\nAlso has a [self-reference](node:cycle-a) for testing."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "cycle-b"
+      },
+      "text": "B",
+      "sourceId": "cycle-a"
+    },
+    {
+      "ref": {
+        "id": "cycle-c"
+      },
+      "text": "C",
+      "sourceId": "cycle-a"
+    },
+    {
+      "ref": {
+        "id": "cycle-a"
+      },
+      "text": "self-reference",
+      "sourceId": "cycle-a"
+    }
+  ]
+}

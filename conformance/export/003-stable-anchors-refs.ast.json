@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "simple-id",
+      "title": "Simple",
+      "body": "Simple section.\n\n---\nid: my-section-id\ntitle: Dashed\n---\n\nDashed section.\n\n---\nid: section-123\ntitle: Numbered\n---\n\nNumbered section.\n\n---\nid: complex_id-v2\ntitle: Complex\n---\n\nComplex section."
+    }
+  ],
+  "links": []
+}

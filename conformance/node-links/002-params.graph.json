@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "test-params": {
+      "outgoing": { "target-section": 1, "other-section": 1, "third-section": 1, "fourth-section": 1 },
+      "incoming": {}
+    }
+  }
+}

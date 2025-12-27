@@ -1,0 +1,11 @@
+{
+  "sections": [
+    {
+      "id": "dedupe-shared",
+      "title": "Shared Section",
+      "peek": "This section is referenced multiple times",
+      "body": "This is the shared section content that should only appear once in the appendix export, despite being referenced multiple times."
+    }
+  ],
+  "links": []
+}

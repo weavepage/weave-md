@@ -98,6 +98,12 @@ const allDiagnostics = [...fmDiagnostics, ...linkErrors, ...blockDiagnostics, ..
 console.log(formatDiagnostics(allDiagnostics));
 ```
 
+## Related Packages
+
+- `@weave-md/core` - Core types and helpers (peer dependency)
+- `@weave-md/parse` - Full AST generation with parse-time validation
+- `@weave-md/basic` - CLI and rendering (uses both parse and validate)
+
 ## Dependencies
 
 - `@weave-md/core` - Core types and helpers

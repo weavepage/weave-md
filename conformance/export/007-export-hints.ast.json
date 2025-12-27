@@ -1,0 +1,53 @@
+{
+  "sections": [
+    {
+      "id": "export-hints-test",
+      "title": "Export Hints Test",
+      "body": "Test all export hint values defined in the spec:\n\nReferences with export hints:\n- [Appendix hint](node:section-a?export=appendix)\n- [Inline hint](node:section-b?export=inline)\n- [Omit hint](node:section-c?export=omit)\n\nCombined display and export:\n- [Footnote with appendix](node:section-d?display=footnote&export=appendix)\n- [Inline with inline export](node:section-e?display=inline&export=inline)"
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "section-a",
+        "export": "appendix"
+      },
+      "text": "Appendix hint",
+      "sourceId": "export-hints-test"
+    },
+    {
+      "ref": {
+        "id": "section-b",
+        "export": "inline"
+      },
+      "text": "Inline hint",
+      "sourceId": "export-hints-test"
+    },
+    {
+      "ref": {
+        "id": "section-c",
+        "export": "omit"
+      },
+      "text": "Omit hint",
+      "sourceId": "export-hints-test"
+    },
+    {
+      "ref": {
+        "id": "section-d",
+        "display": "footnote",
+        "export": "appendix"
+      },
+      "text": "Footnote with appendix",
+      "sourceId": "export-hints-test"
+    },
+    {
+      "ref": {
+        "id": "section-e",
+        "display": "inline",
+        "export": "inline"
+      },
+      "text": "Inline with inline export",
+      "sourceId": "export-hints-test"
+    }
+  ]
+}

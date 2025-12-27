@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "escaping-test": {
+      "outgoing": {
+        "my id": 1,
+        "id/with/slashes": 1,
+        "target": 3,
+        "my-id": 1,
+        "simple-id": 1
+      },
+      "incoming": {}
+    }
+  }
+}

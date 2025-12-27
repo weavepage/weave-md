@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "nested-c",
+      "title": "Section C",
+      "body": "Section C is the end of the chain."
+    }
+  ],
+  "links": []
+}

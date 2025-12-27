@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "id": "ordering-main",
+      "title": "Appendix Ordering Test",
+      "body": "References in order:\n1. [Third](node:ordering-third)\n2. [First](node:ordering-first)\n3. [Second](node:ordering-second)\n4. [First again](node:ordering-first)\n\nThe appendix should preserve first-reference order, with deduplication."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "ordering-third"
+      },
+      "text": "Third",
+      "sourceId": "ordering-main"
+    },
+    {
+      "ref": {
+        "id": "ordering-first"
+      },
+      "text": "First",
+      "sourceId": "ordering-main"
+    },
+    {
+      "ref": {
+        "id": "ordering-second"
+      },
+      "text": "Second",
+      "sourceId": "ordering-main"
+    },
+    {
+      "ref": {
+        "id": "ordering-first"
+      },
+      "text": "First again",
+      "sourceId": "ordering-main"
+    }
+  ]
+}

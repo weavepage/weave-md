@@ -7,29 +7,15 @@
   "properties": {
     "nodes": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/GraphNode"
-      }
-    },
-    "occurrences": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "$ref": "https://weave-md.org/schema/weave-ast.schema.json#/definitions/Link"
-        }
-      }
+      "additionalProperties": { "$ref": "#/definitions/GraphNode" },
+      "description": "Map of node IDs to node data"
     }
   },
-  "required": ["nodes", "occurrences"],
+  "required": ["nodes"],
   "definitions": {
     "GraphNode": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "minLength": 1
-        },
         "outgoing": {
           "type": "object",
           "additionalProperties": {
@@ -47,7 +33,7 @@
           "description": "Map of source node IDs to occurrence counts"
         }
       },
-      "required": ["id", "outgoing", "incoming"]
+      "required": ["outgoing", "incoming"]
     }
   }
 }

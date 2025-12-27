@@ -1,0 +1,11 @@
+{
+  "errors": [
+    {
+      "type": "invalid_yaml",
+      "severity": "error",
+      "message": "Failed to parse YAML frontmatter",
+      "filePath": "004-invalid-frontmatter.md",
+      "details": "YAML syntax error"
+    }
+  ]
+}

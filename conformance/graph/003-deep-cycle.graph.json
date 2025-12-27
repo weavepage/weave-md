@@ -1,0 +1,46 @@
+{
+  "nodes": {
+    "deep-1": {
+      "outgoing": {
+        "deep-2": 1
+      },
+      "incoming": {
+        "deep-5": 1
+      }
+    },
+    "deep-2": {
+      "outgoing": {
+        "deep-3": 1
+      },
+      "incoming": {
+        "deep-1": 1
+      }
+    },
+    "deep-3": {
+      "outgoing": {
+        "deep-4": 1
+      },
+      "incoming": {
+        "deep-2": 1,
+        "deep-5": 1
+      }
+    },
+    "deep-4": {
+      "outgoing": {
+        "deep-5": 1
+      },
+      "incoming": {
+        "deep-3": 1
+      }
+    },
+    "deep-5": {
+      "outgoing": {
+        "deep-1": 1,
+        "deep-3": 1
+      },
+      "incoming": {
+        "deep-4": 1
+      }
+    }
+  }
+}

@@ -14,11 +14,12 @@ Weave Markdown extends standard Markdown with:
 This repository is a **spec-like monorepo** containing:
 
 - `@weave-md/core` - Language contract (spec + schemas + types + pure helpers)
-- `@weave-md/validate` - Reference validation (lightweight for editor/CI)
-- `@weave-md/basic` - Reference implementation (parser + renderer + exporter)
+- `@weave-md/parse` - AST generation (markdown → WeaveAst)
+- `@weave-md/validate` - Document-level validation (lightweight for editor/CI)
+- `@weave-md/basic` - Reference implementation (CLI + renderer + exporter)
 - `conformance/` - Normative test corpus
 - `examples/` - Non-normative demos
-- `dev-tools/` - Conformance runners and repo validation
+- `tests/` - Internal tests
 
 ## Repository Layout
 
@@ -26,11 +27,12 @@ This repository is a **spec-like monorepo** containing:
 weave-md/
 ├── packages/
 │   ├── core/          # @weave-md/core - spec, schemas, types
+│   ├── parse/         # @weave-md/parse - AST generation
 │   ├── validate/      # @weave-md/validate - validation
-│   └── basic/         # @weave-md/basic - reference implementation
+│   └── basic/         # @weave-md/basic - CLI + rendering + export
 ├── conformance/       # Normative conformance tests
 ├── examples/          # Non-normative examples
-├── dev-tools/         # Conformance runners
+├── tests/             # Internal tests
 └── README.md
 ```
 
@@ -46,14 +48,10 @@ npm install
 npm run build
 ```
 
-### Run Conformance Tests
+### Run Tests
 
 ```bash
-# Test core parsing (AST + graph)
-npm run conformance:core
-
-# Test basic profile (includes export)
-npm run conformance:basic
+npm test
 ```
 
 ### Export a Document
@@ -76,19 +74,29 @@ npm install @weave-md/core
 
 See [packages/core/README.md](./packages/core/README.md) and [spec/](./packages/core/spec/).
 
-### [@weave-md/validate](./packages/validate)
+### [@weave-md/parse](./packages/parse)
 
-Reference validation for editors and CI:
+AST generation for building custom renderers and tools:
 
 ```bash
-npm install @weave-md/validate
+npm install @weave-md/parse @weave-md/core
+```
+
+See [packages/parse/README.md](./packages/parse/README.md).
+
+### [@weave-md/validate](./packages/validate)
+
+Document-level validation for editors and CI:
+
+```bash
+npm install @weave-md/validate @weave-md/core
 ```
 
 See [packages/validate/README.md](./packages/validate/README.md).
 
 ### [@weave-md/basic](./packages/basic)
 
-Reference implementation with HTML/appendix export:
+Reference implementation with CLI, rendering, and export:
 
 ```bash
 npm install @weave-md/basic
@@ -114,6 +122,7 @@ Conformance tests in `conformance/` define correct behavior. See [packages/core/
 
 **Public OSS (this repo):**
 - `@weave-md/core`
+- `@weave-md/parse`
 - `@weave-md/validate`
 - `@weave-md/basic`
 

@@ -1,0 +1,83 @@
+{
+  "sections": [
+    {
+      "id": "anchor-only-test",
+      "title": "Anchor-Only References Test",
+      "body": "Test the canonical anchor-only syntax using `[ ]`:\n\nFootnote anchor-only: [ ](node:fn1?display=footnote)\n\nSidenote anchor-only: [ ](node:sn1?display=sidenote)\n\nMargin note anchor-only: [ ](node:mn1?display=margin)\n\nOverlay anchor-only: [ ](node:overlay1?display=overlay)\n\nInline anchor-only: [ ](node:inline1?display=inline)\n\nStretch anchor-only: [ ](node:stretch1?display=stretch)\n\nPage anchor-only: [ ](node:page1?display=page)\n\nMixed with text-linked: [explicit text](node:mixed?display=inline) and anchor-only [ ](node:mixed?display=inline)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "fn1",
+        "display": "footnote"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "sn1",
+        "display": "sidenote"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "mn1",
+        "display": "margin"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "overlay1",
+        "display": "overlay"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "inline1",
+        "display": "inline"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "stretch1",
+        "display": "stretch"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "page1",
+        "display": "page"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "mixed",
+        "display": "inline"
+      },
+      "text": "explicit text",
+      "sourceId": "anchor-only-test"
+    },
+    {
+      "ref": {
+        "id": "mixed",
+        "display": "inline"
+      },
+      "text": "",
+      "sourceId": "anchor-only-test"
+    }
+  ]
+}

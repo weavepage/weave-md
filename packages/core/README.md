@@ -63,6 +63,12 @@ const gallery: GalleryBlock = {
 };
 ```
 
+## Related Packages
+
+- `@weave-md/parse` - AST generation (depends on core)
+- `@weave-md/validate` - Document-level validation (depends on core)
+- `@weave-md/basic` - CLI, rendering, export (depends on parse + validate)
+
 ## Links
 
 - [Specification](./spec/index.md)

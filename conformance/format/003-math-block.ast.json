@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "math-block-test",
+      "title": "Math Block Test",
+      "body": "A document with a math block:\n\n```math\nE = mc^2\n```\n\nAnd another:\n\n```math\n\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\n```"
+    }
+  ],
+  "links": []
+}

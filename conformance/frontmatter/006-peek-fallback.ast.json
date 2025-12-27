@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "no-peek",
+      "title": "Section Without Peek",
+      "body": "This section has no explicit `peek` field in frontmatter.\n\nThe first paragraph should be used as the excerpt fallback.\n\nThis is a second paragraph that should not be included in the peek."
+    }
+  ],
+  "links": []
+}

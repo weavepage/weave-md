@@ -1,5 +1,8 @@
 import { Link, Diagnostic, parseNodeUrl } from '@weave-md/core';
 
+// Pre-compiled regex - avoid creating on each link
+const INVALID_ID_CHARS = /[@#$^&*()+=\[\]{}|\\;:'",<>?]/;
+
 export interface ExtractNodeLinksResult {
   links: Link[];
   errors: Diagnostic[];
@@ -51,6 +54,11 @@ function extractLinksFromLine(
             const url = line.substring(nodeUrlStart, nodeUrlEnd);
             const remainder = line.substring(nodeUrlEnd, urlEnd);
 
+            // Extract link text (between [ and ])
+            const linkText = line.substring(i + 1, textEnd);
+            const normalizedText = hasNonWhitespace(linkText) ? linkText : '';
+            
+            // If there's trailing content, it means spaces in the ID - don't extract
             if (hasNonWhitespace(remainder)) {
               errors.push({
                 severity: 'error',
@@ -59,31 +67,65 @@ function extractLinksFromLine(
                 position: { line: lineIndex + 1, character: nodeUrlStart + 1 },
                 code: 'invalid-node-url'
               });
-            } else {
-              const parsed = parseNodeUrl(url);
+              i = urlEnd + 1;
+              continue;
+            }
+            
+            const parsed = parseNodeUrl(url);
 
-              if (parsed.success) {
-                links.push({
-                  ref: parsed.ref,
-                  sourceId: filePath || `line-${lineIndex + 1}`,
-                  start: {
-                    line: lineIndex + 1,
-                    character: nodeUrlStart + 1
-                  },
-                  end: {
-                    line: lineIndex + 1,
-                    character: nodeUrlEnd + 1
-                  }
-                });
-              } else {
+            if (parsed.success) {
+              // Check if ID has invalid characters
+              const hasInvalidChars = INVALID_ID_CHARS.test(parsed.ref.id);
+              
+              links.push({
+                ref: parsed.ref,
+                text: normalizedText,
+                sourceId: filePath || `line-${lineIndex + 1}`,
+                start: {
+                  line: lineIndex + 1,
+                  character: nodeUrlStart + 1
+                },
+                end: {
+                  line: lineIndex + 1,
+                  character: nodeUrlEnd + 1
+                }
+              });
+              
+              // Add error for invalid characters even if parsing succeeded
+              if (hasInvalidChars) {
                 errors.push({
                   severity: 'error',
-                  message: `Invalid node URL: ${parsed.error}`,
+                  message: 'Invalid node URL: Invalid characters in node ID',
                   filePath,
                   position: { line: lineIndex + 1, character: nodeUrlStart + 1 },
                   code: 'invalid-node-url'
                 });
               }
+            } else {
+              // Extract raw ID for best-effort parsing when parseNodeUrl fails
+              const qIndex = url.indexOf('?', 5);
+              const rawId = qIndex === -1 ? url.slice(5) : url.substring(5, qIndex);
+              
+              links.push({
+                ref: { id: rawId },
+                text: normalizedText,
+                sourceId: filePath || `line-${lineIndex + 1}`,
+                start: {
+                  line: lineIndex + 1,
+                  character: nodeUrlStart + 1
+                },
+                end: {
+                  line: lineIndex + 1,
+                  character: nodeUrlEnd + 1
+                }
+              });
+              errors.push({
+                severity: 'error',
+                message: `Invalid node URL: ${parsed.error}`,
+                filePath,
+                position: { line: lineIndex + 1, character: nodeUrlStart + 1 },
+                code: 'invalid-node-url'
+              });
             }
 
             i = urlEnd + 1;
@@ -127,15 +169,9 @@ export function findClosingBracket(str: string, startIndex: number): number {
   let i = startIndex;
   
   while (i < str.length && depth > 0) {
-    // Check for backslash escape
-    if (str[i] === '\\' && i + 1 < str.length) {
-      i += 2;
-      continue;
-    }
-    
-    if (str[i] === '[') {
+    if (str[i] === '[' && !isEscaped(str, i)) {
       depth++;
-    } else if (str[i] === ']') {
+    } else if (str[i] === ']' && !isEscaped(str, i)) {
       depth--;
       if (depth === 0) {
         return i;
@@ -153,14 +189,9 @@ export function findMatchingParen(str: string, openParenIndex: number): number {
   let i = openParenIndex + 1;
   
   while (i < str.length && depth > 0) {
-    if (str[i] === '\\' && i + 1 < str.length) {
-      i += 2;
-      continue;
-    }
-    
-    if (str[i] === '(') {
+    if (str[i] === '(' && !isEscaped(str, i)) {
       depth++;
-    } else if (str[i] === ')') {
+    } else if (str[i] === ')' && !isEscaped(str, i)) {
       depth--;
       if (depth === 0) {
         return i;

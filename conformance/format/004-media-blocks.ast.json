@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "media-blocks-test",
+      "title": "Media Blocks Test",
+      "body": "An image block:\n\n```image\nfile: /photos/example.jpg\nalt: An example image\ncaption: This is the caption\n```\n\nA gallery block:\n\n```gallery\nfiles:\n  - /photos/one.jpg\n  - /photos/two.jpg\n```\n\nAn audio block:\n\n```audio\nfile: /audio/podcast.mp3\n```\n\nA video block:\n\n```video\nfile: /video/demo.mp4\nposter: /video/poster.jpg\n```\n\nAn embed block:\n\n```embed\nurl: https://example.com/embed\n```\n\nA voiceover block:\n\n```voiceover\nfile: /audio/narration.mp3\n```"
+    }
+  ],
+  "links": []
+}

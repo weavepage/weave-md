@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "ordering-first",
+      "title": "First Referenced",
+      "body": "This was referenced second but should appear first in appendix (after third)."
+    }
+  ],
+  "links": []
+}

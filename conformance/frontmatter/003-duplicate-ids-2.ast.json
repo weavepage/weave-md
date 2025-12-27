@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "duplicate-test",
+      "title": "Second Section with Duplicate ID",
+      "body": "This is the second section with the same ID `duplicate-test`.\n\nThis should be detected as an error."
+    }
+  ],
+  "links": []
+}

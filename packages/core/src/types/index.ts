@@ -20,7 +20,7 @@ export interface NodeRef {
   id: string;
   display?: DisplayType;
   export?: ExportHint;
-  params?: Record<string, string>;
+  [key: string]: string | DisplayType | ExportHint | boolean | undefined;
 }
 
 export interface SourcePosition {

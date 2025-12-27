@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "id": "dedupe-other",
+      "title": "Another Section",
+      "body": "This section also references the [shared section](node:dedupe-shared)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "dedupe-shared"
+      },
+      "text": "shared section",
+      "sourceId": "dedupe-other"
+    }
+  ]
+}

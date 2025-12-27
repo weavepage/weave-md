@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "malformed-urls": {
+      "outgoing": {
+        "target": 2,
+        "valid-id": 1
+      },
+      "incoming": {}
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "id": "deep-4",
+      "title": "Deep Cycle Test - Level 4",
+      "body": "Middle of chain. References [level 5](node:deep-5)."
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "deep-5"
+      },
+      "text": "level 5",
+      "sourceId": "deep-4"
+    }
+  ]
+}

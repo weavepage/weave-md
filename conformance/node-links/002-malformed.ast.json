@@ -1,0 +1,62 @@
+{
+  "sections": [
+    {
+      "id": "malformed-urls",
+      "title": "Malformed Node URLs",
+      "body": "Test various malformed node: URL patterns.\n\n## Missing ID\nLink with no ID: [Empty node link](node:)\n\n## Invalid characters in ID\nLink with spaces: [Spaced ID](node:my invalid id)\nLink with special chars: [Special](node:id@#$%)\n\n## Malformed query params\nMissing value: [No value](node:target?display=)\nInvalid param: [Bad param](node:target?invalid)\nDuplicate display: [Dupes](node:target?display=footnote&display=inline)\nDuplicate export: [Export dupes](node:target?export=appendix&export=inline)\n\n## Valid reference for comparison\nThis should work: [Valid](node:valid-id?display=inline)"
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": ""
+      },
+      "text": "Empty node link",
+      "sourceId": "malformed-urls"
+    },
+    {
+      "ref": {
+        "id": "id@#$%"
+      },
+      "text": "Special",
+      "sourceId": "malformed-urls"
+    },
+    {
+      "ref": {
+        "id": "target"
+      },
+      "text": "No value",
+      "sourceId": "malformed-urls"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "invalid": true
+      },
+      "text": "Bad param",
+      "sourceId": "malformed-urls"
+    },
+    {
+      "ref": {
+        "id": "target"
+      },
+      "text": "Dupes",
+      "sourceId": "malformed-urls"
+    },
+    {
+      "ref": {
+        "id": "target"
+      },
+      "text": "Export dupes",
+      "sourceId": "malformed-urls"
+    },
+    {
+      "ref": {
+        "id": "valid-id",
+        "display": "inline"
+      },
+      "text": "Valid",
+      "sourceId": "malformed-urls"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "nodes": {
+    "anchor-only-test": {
+      "outgoing": {
+        "fn1": 1,
+        "sn1": 1,
+        "mn1": 1,
+        "overlay1": 1,
+        "inline1": 1,
+        "stretch1": 1,
+        "page1": 1,
+        "mixed": 2
+      },
+      "incoming": {}
+    }
+  }
+}

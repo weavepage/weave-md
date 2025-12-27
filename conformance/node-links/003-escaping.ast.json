@@ -1,0 +1,67 @@
+{
+  "sections": [
+    {
+      "id": "escaping-test",
+      "title": "URL Escaping and Encoding",
+      "body": "Test proper handling of URL encoding in node links.\n\n## Encoded characters in ID\nLink with encoded space: [Encoded](node:my%20id)\nLink with encoded special: [Special](node:id%2Fwith%2Fslashes)\n\n## Encoded query params\nEncoded param value: [Inline text](node:target?display=inline&text=Hello%20World)\nMultiple encoded: [Complex](node:target?text=foo%26bar%3Dbaz)\n\n## Mixed encoding\nPartially encoded: [Mixed](node:my-id?display=inline&label=Test%20Label)\n\n## Unicode in params\nUnicode text: [Unicode](node:target?text=%E2%9C%93%20Done)\n\n## Valid unencoded for comparison\nSimple case: [Simple](node:simple-id?display=inline)"
+    }
+  ],
+  "links": [
+    {
+      "ref": {
+        "id": "my%20id"
+      },
+      "text": "Encoded",
+      "sourceId": "escaping-test"
+    },
+    {
+      "ref": {
+        "id": "id%2Fwith%2Fslashes"
+      },
+      "text": "Special",
+      "sourceId": "escaping-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "display": "inline",
+        "text": "Hello World"
+      },
+      "text": "Inline text",
+      "sourceId": "escaping-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "text": "foo&bar=baz"
+      },
+      "text": "Complex",
+      "sourceId": "escaping-test"
+    },
+    {
+      "ref": {
+        "id": "my-id",
+        "display": "inline",
+        "label": "Test Label"
+      },
+      "text": "Mixed",
+      "sourceId": "escaping-test"
+    },
+    {
+      "ref": {
+        "id": "target",
+        "text": "✓ Done"
+      },
+      "text": "Unicode",
+      "sourceId": "escaping-test"
+    },
+    {
+      "ref": {
+        "id": "simple-id",
+        "display": "inline"
+      },
+      "text": "Simple",
+      "sourceId": "escaping-test"
+    }
+  ]
+}
