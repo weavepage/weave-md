@@ -17,6 +17,9 @@
   "scripts": {
     "build": "tsc"
   },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
   "keywords": [
     "weave",
     "markdown",

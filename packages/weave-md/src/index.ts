@@ -10,7 +10,6 @@
  * @see https://github.com/weavepage/weave-md
  */
 
-export * from '@weave-md/core';
 export * as core from '@weave-md/core';
 export * as parse from '@weave-md/parse';
 export * as validate from '@weave-md/validate';

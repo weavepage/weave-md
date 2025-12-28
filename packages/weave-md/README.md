@@ -32,15 +32,14 @@ npm install weave-md
 ```typescript
 // Import from individual packages (recommended)
 import { parseWeaveDocument, compileToWeaveAst } from '@weave-md/parse';
-import { validateLinks } from '@weave-md/validate';
-import type { WeaveFormat } from '@weave-md/core';
+import { extractNodeLinks } from '@weave-md/validate';
+import type { Section, NodeRef } from '@weave-md/core';
 
 // Or import from umbrella package (namespaced)
 import { parse, validate, core, basic } from 'weave-md';
 
 const ast = parse.parseWeaveDocument(markdown);
-const errors = validate.validateLinks(ast);
-const html = basic.exportToStaticHtml(ast);
+const { links, errors } = validate.extractNodeLinks(markdown);
 ```
 
 ## Links
