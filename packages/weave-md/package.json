@@ -1,0 +1,40 @@
+{
+  "name": "weave-md",
+  "version": "0.1.0-alpha.0",
+  "description": "Weave Markdown - inline, expandable references for markdown. Umbrella package for @weave-md/* packages.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "weave",
+    "markdown",
+    "references",
+    "inline",
+    "expandable"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weavepage/weave-md.git",
+    "directory": "packages/weave-md"
+  },
+  "dependencies": {
+    "@weave-md/core": "^0.1.0-alpha.0",
+    "@weave-md/parse": "^0.1.0-alpha.0",
+    "@weave-md/validate": "^0.1.0-alpha.0",
+    "@weave-md/basic": "^0.1.0-alpha.0"
+  }
+}
