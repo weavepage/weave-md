@@ -74,7 +74,7 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
     .weave-icon {
       width: 1.2em;
       height: 1.2em;
-      vertical-align: middle;
+      vertical-align: -0.2em;
     }
 
     .weave-overlay-anchor,
