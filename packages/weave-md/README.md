@@ -18,13 +18,13 @@ This is an umbrella package that re-exports all `@weave-md/*` packages. For most
 Install individual packages (recommended):
 
 ```bash
-npm install @weave-md/core @weave-md/parse
+pnpm add @weave-md/core @weave-md/parse
 ```
 
 Or install everything via this umbrella package:
 
 ```bash
-npm install weave-md
+pnpm add weave-md
 ```
 
 ## Usage

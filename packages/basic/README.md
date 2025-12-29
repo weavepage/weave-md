@@ -5,7 +5,7 @@ CLI and exporter for Weave Markdown.
 ## Installation
 
 ```bash
-npm install @weave-md/basic
+pnpm add @weave-md/basic
 ```
 
 ## CLI

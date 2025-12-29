@@ -32,7 +32,7 @@
     "directory": "packages/parse"
   },
   "peerDependencies": {
-    "@weave-md/core": "^0.1.0-alpha.0"
+    "@weave-md/core": "workspace:*"
   },
   "dependencies": {
     "mdast-util-from-markdown": "^2.0.2",
@@ -56,7 +56,7 @@
   "devDependencies": {
     "@types/mdast": "^4.0.4",
     "@types/node": "^20.10.0",
-    "@weave-md/core": "^0.1.0-alpha.0",
+    "@weave-md/core": "workspace:*",
     "micromark-util-types": "^2.0.2",
     "typescript": "^5.7.0"
   }

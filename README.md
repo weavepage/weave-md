@@ -42,16 +42,16 @@ weave-md/
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Build all packages
-npm run build
+pnpm build
 ```
 
 ### Run Tests
 
 ```bash
-npm test
+pnpm test
 ```
 
 ### Export a Document
@@ -77,7 +77,7 @@ weave-md-basic export html
 The language contract - pure helpers with no I/O:
 
 ```bash
-npm install @weave-md/core
+pnpm add @weave-md/core
 ```
 
 See [packages/core/README.md](./packages/core/README.md) and [spec/](./packages/core/spec/).
@@ -87,7 +87,7 @@ See [packages/core/README.md](./packages/core/README.md) and [spec/](./packages/
 AST generation for building custom renderers and tools:
 
 ```bash
-npm install @weave-md/parse @weave-md/core
+pnpm add @weave-md/parse @weave-md/core
 ```
 
 See [packages/parse/README.md](./packages/parse/README.md).
@@ -97,7 +97,7 @@ See [packages/parse/README.md](./packages/parse/README.md).
 Document-level validation for editors and CI:
 
 ```bash
-npm install @weave-md/validate @weave-md/core
+pnpm add @weave-md/validate @weave-md/core
 ```
 
 See [packages/validate/README.md](./packages/validate/README.md).
@@ -107,7 +107,7 @@ See [packages/validate/README.md](./packages/validate/README.md).
 Reference implementation with CLI, rendering, and export:
 
 ```bash
-npm install @weave-md/basic
+pnpm add @weave-md/basic
 ```
 
 See [packages/basic/README.md](./packages/basic/README.md).

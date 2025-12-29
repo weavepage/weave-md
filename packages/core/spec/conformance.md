@@ -47,10 +47,10 @@ Use the conformance runner in `dev-tools/`:
 
 ```bash
 # Test core parsing (AST + graph)
-npm run conformance:core
+pnpm conformance:core
 
 # Test basic profile
-npm run conformance:basic
+pnpm conformance:basic
 ```
 
 ## Test Naming

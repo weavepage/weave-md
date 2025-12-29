@@ -76,7 +76,7 @@ Each test case consists of:
 From the repository root:
 
 ```bash
-npm test
+pnpm test
 ```
 
 This runs vitest, which tests both implementations against the conformance fixtures:

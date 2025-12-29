@@ -34,14 +34,14 @@
     "directory": "packages/validate"
   },
   "peerDependencies": {
-    "@weave-md/core": "^0.1.0-alpha.0"
+    "@weave-md/core": "workspace:*"
   },
   "dependencies": {
     "yaml": "^2.3.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
-    "@weave-md/core": "^0.1.0-alpha.0",
+    "@weave-md/core": "workspace:*",
     "typescript": "^5.7.0"
   }
 }

@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "cd ../.. && npx vitest run packages/basic/test"
+    "test": "cd ../.. && pnpm vitest run packages/basic/test"
   },
   "keywords": [
     "weave",
@@ -36,20 +36,21 @@
     "directory": "packages/basic"
   },
   "peerDependencies": {
-    "@weave-md/core": "^0.1.0-alpha.0"
+    "@weave-md/core": "workspace:*"
   },
   "dependencies": {
-    "@weave-md/parse": "^0.1.0-alpha.0",
-    "@weave-md/validate": "^0.1.0-alpha.0",
+    "@weave-md/parse": "workspace:*",
+    "@weave-md/validate": "workspace:*",
     "hast-util-to-html": "^9.0.5",
     "katex": "^0.16.9",
     "mdast-util-to-hast": "^13.2.1",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "@types/node": "^20.10.0",
-    "@weave-md/core": "^0.1.0-alpha.0",
+    "@weave-md/core": "workspace:*",
     "typescript": "^5.7.0",
     "vitest": "^1.6.0"
   }

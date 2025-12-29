@@ -27,7 +27,7 @@ This package intentionally does **not**:
 ## Installation
 
 ```bash
-npm install @weave-md/parse @weave-md/core
+pnpm add @weave-md/parse @weave-md/core
 ```
 
 ## Usage

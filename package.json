@@ -4,11 +4,8 @@
   "description": "Markdown flavor for inline, expandable references",
   "type": "module",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "pnpm -r run build",
     "test": "vitest run",
     "test:validate": "vitest run conformance.validate",
     "test:parse": "vitest run conformance.parse"
@@ -25,6 +22,10 @@
     "url": "https://github.com/weavepage/weave-md.git"
   },
   "devDependencies": {
+    "@weave-md/basic": "workspace:*",
+    "@weave-md/core": "workspace:*",
+    "@weave-md/parse": "workspace:*",
+    "@weave-md/validate": "workspace:*",
     "typescript": "^5.3.0",
     "vitest": "^4.0.16"
   }

@@ -37,7 +37,7 @@ It's designed to be fast and lightweight for use in editors and CI pipelines.
 ## Installation
 
 ```bash
-npm install @weave-md/validate
+pnpm add @weave-md/validate
 ```
 
 ## CLI Usage

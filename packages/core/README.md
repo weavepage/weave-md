@@ -26,7 +26,7 @@ This package contains:
 ## Installation
 
 ```bash
-npm install @weave-md/core
+pnpm add @weave-md/core
 ```
 
 ## Usage

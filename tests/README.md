@@ -12,9 +12,9 @@ Internal tests for the weave-md repository.
 ## Usage
 
 ```bash
-npm test              # All tests
-npm run test:validate # Only validate conformance
-npm run test:parse    # Only parse conformance
+pnpm test              # All tests
+pnpm test:validate     # Only validate conformance
+pnpm test:parse        # Only parse conformance
 ```
 
 ## For External Implementers

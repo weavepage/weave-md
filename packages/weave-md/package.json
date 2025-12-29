@@ -35,9 +35,9 @@
     "directory": "packages/weave-md"
   },
   "dependencies": {
-    "@weave-md/core": "^0.1.0-alpha.0",
-    "@weave-md/parse": "^0.1.0-alpha.0",
-    "@weave-md/validate": "^0.1.0-alpha.0",
-    "@weave-md/basic": "^0.1.0-alpha.0"
+    "@weave-md/core": "workspace:*",
+    "@weave-md/parse": "workspace:*",
+    "@weave-md/validate": "workspace:*",
+    "@weave-md/basic": "workspace:*"
   }
 }
