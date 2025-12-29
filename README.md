@@ -6,140 +6,63 @@ A Markdown flavor for inline, expandable references between sections of content.
 
 Weave Markdown extends standard Markdown with:
 
-- **Section frontmatter** - YAML metadata blocks defining section identity
-- **Node links** - Special `node:` URL scheme for referencing sections
-- **Graph semantics** - Well-defined behavior for reference expansion and cycles
-- **Weave format** - Rich media (gallery, audio, video), math (LaTeX), preformatted text, embeds, and voiceover
-
-This repository is a **spec-like monorepo** containing:
-
-- `@weave-md/core` - Language contract (spec + schemas + types + pure helpers)
-- `@weave-md/parse` - AST generation (markdown → WeaveAst)
-- `@weave-md/validate` - Document-level validation (lightweight for editor/CI)
-- `@weave-md/basic` - Reference implementation (CLI + renderer + exporter)
-- `conformance/` - Normative test corpus
-- `examples/` - Non-normative demos
-- `tests/` - Internal tests
+- **Section frontmatter** — YAML metadata defining section identity
+- **Node links** — `node:` URL scheme for referencing sections
+- **Weave format** — Rich media, math (LaTeX), embeds, and voiceover
 
 ## Repository Layout
 
 ```
 weave-md/
 ├── packages/
-│   ├── core/          # @weave-md/core - spec, schemas, types
-│   ├── parse/         # @weave-md/parse - AST generation
-│   ├── validate/      # @weave-md/validate - validation
-│   └── basic/         # @weave-md/basic - CLI + rendering + export
-├── conformance/       # Normative conformance tests
-├── examples/          # Non-normative examples
-├── tests/             # Internal tests
-└── README.md
+│   ├── core/       # Spec, schemas, types, pure helpers
+│   ├── parse/      # AST generation
+│   ├── validate/   # Document validation
+│   └── basic/      # CLI + rendering + export
+├── conformance/    # Normative test corpus
+├── examples/       # Non-normative demos
+└── tests/
 ```
 
 ## Getting Started
 
-### Installation
-
 ```bash
-# Install dependencies
-pnpm install
-
-# Build all packages
-pnpm build
+pnpm install && pnpm build   # Install and build
+pnpm test                    # Run tests
 ```
 
-### Run Tests
+### CLI (via @weave-md/basic)
 
 ```bash
-pnpm test
+weave-md-basic export html --entry=intro   # Export to HTML
+weave-md-basic export ast                  # Export to JSON AST
 ```
 
-### Export a Document
-
-```bash
-# Export to HTML
-weave-md-basic export html --entry=intro
-
-# Export to JSON AST
-weave-md-basic export ast
-```
-
-**HTML entry point:** If exactly one `.md` file exists in the root directory, `--entry` is auto-detected:
-
-```bash
-weave-md-basic export html
-```
+See [@weave-md/basic](./packages/basic/README.md) for more CLI options.
 
 ## Packages
 
-### [@weave-md/core](./packages/core)
-
-The language contract - pure helpers with no I/O:
-
-```bash
-pnpm add @weave-md/core
-```
-
-See [packages/core/README.md](./packages/core/README.md) and [spec/](./packages/core/spec/).
-
-### [@weave-md/parse](./packages/parse)
-
-AST generation for building custom renderers and tools:
-
-```bash
-pnpm add @weave-md/parse @weave-md/core
-```
-
-See [packages/parse/README.md](./packages/parse/README.md).
-
-### [@weave-md/validate](./packages/validate)
-
-Document-level validation for editors and CI:
-
-```bash
-pnpm add @weave-md/validate @weave-md/core
-```
-
-See [packages/validate/README.md](./packages/validate/README.md).
-
-### [@weave-md/basic](./packages/basic)
-
-Reference implementation with CLI, rendering, and export:
-
-```bash
-pnpm add @weave-md/basic
-```
-
-See [packages/basic/README.md](./packages/basic/README.md).
+| Package | Description |
+|---------|-------------|
+| [@weave-md/core](./packages/core) | Language contract — spec, schemas, types, pure helpers |
+| [@weave-md/parse](./packages/parse) | AST generation (markdown → WeaveAst) |
+| [@weave-md/validate](./packages/validate) | Document validation for editors/CI |
+| [@weave-md/basic](./packages/basic) | Reference implementation — CLI, rendering, export |
 
 ## Specification
 
-The normative specification is in [packages/core/spec/](./packages/core/spec/):
+The normative spec lives in [packages/core/spec/](./packages/core/spec/): [Overview](./packages/core/spec/index.md) · [Node Links](./packages/core/spec/node-links.md) · [Frontmatter](./packages/core/spec/frontmatter.md) · [Weave Format](./packages/core/spec/weave-format.md) · [Conformance](./packages/core/spec/conformance.md)
 
-- [Overview](./packages/core/spec/index.md)
-- [Node Links](./packages/core/spec/node-links.md)
-- [Frontmatter](./packages/core/spec/frontmatter.md)
-- [Weave Format](./packages/core/spec/weave-format.md)
-- [Conformance](./packages/core/spec/conformance.md)
-
-## Conformance
-
-Conformance tests in `conformance/` define correct behavior. See [packages/core/spec/conformance.md](./packages/core/spec/conformance.md) for details.
+Conformance tests in `conformance/` define correct behavior.
 
 ## Ecosystem
 
-**Public OSS (this repo):**
-- `@weave-md/core`
-- `@weave-md/parse`
-- `@weave-md/validate`
-- `@weave-md/basic`
-
-**Separate repos:**
-- `vscode-weave-md` - VS Code extension
+- **This repo:** `@weave-md/core`, `@weave-md/parse`, `@weave-md/validate`, `@weave-md/basic`
+- **Separate:** `vscode-weave-md` (VS Code extension)
 
 ## Stability
 
-This is version **0.1.0-alpha** - APIs and spec are subject to change.
+Version **0.1.0-alpha** — APIs and spec subject to change.
 
 ## License
 
