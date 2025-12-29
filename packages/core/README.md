@@ -69,10 +69,15 @@ const gallery: GalleryBlock = {
 - `@weave-md/validate` - Document-level validation (depends on core)
 - `@weave-md/basic` - CLI, rendering, export (depends on parse + validate)
 
+## For AI Agents
+
+[AGENTS.md](./AGENTS.md) provides a concise syntax reference for AI coding agents that need to write Weave Markdown content. Copy it to your project's content directory so agents can reference it when generating Weave MD.
+
 ## Links
 
 - [Specification](./spec/index.md)
 - [Schemas](./schema/)
+- [AGENTS.md](./AGENTS.md)
 - [GitHub Repository](https://github.com/weavepage/weave-md)
 
 ## License
