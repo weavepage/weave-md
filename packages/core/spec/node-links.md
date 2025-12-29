@@ -171,11 +171,12 @@ Used when inline text is the **explicit affordance**.
 
 ## Export Hints
 
-The `export` parameter in node links provides hints to exporters:
+The `export` parameter provides hints to exporters for static output formats (e.g., email HTML, PDF, print) where JavaScript-based interactivity is unavailable.
 
-- `appendix` - Prefer appendix placement
-- `inline` - Prefer inline expansion
-- `omit` - Exclude from export
+**Export hint values:**
+- `appendix` - Place referenced content in an appendix or endnotes section
+- `inline` - Expand the full content inline at the reference point
+- `omit` - Exclude the reference entirely from export
 
 **Note**: These are hints, not requirements. Exporters MAY ignore them based on context.
 
