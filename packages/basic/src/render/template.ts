@@ -97,9 +97,9 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       display: inline;
     }
 
-    .weave-overlay-anchor:hover,
-    .weave-inline-anchor:hover {
-      color: #0052a3;
+    .weave-overlay-anchor:hover .weave-icon,
+    .weave-inline-anchor:hover .weave-icon {
+      fill: #f0f7ff;
     }
 
     /* Inline expandable content */
@@ -201,6 +201,10 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
     .weave-footnote-backref {
       text-decoration: none;
       color: #0066cc;
+    }
+
+    .weave-footnote-backref:hover {
+      background: #f0f7ff;
     }
 
     .weave-footnote-content {
