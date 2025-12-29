@@ -22,6 +22,7 @@
     "url": "https://github.com/weavepage/weave-md.git"
   },
   "devDependencies": {
+    "@types/node": "^20.19.27",
     "@weave-md/basic": "workspace:*",
     "@weave-md/core": "workspace:*",
     "@weave-md/parse": "workspace:*",

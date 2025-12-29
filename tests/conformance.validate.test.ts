@@ -48,7 +48,8 @@ async function findTestCases(dir: string): Promise<TestCase[]> {
 async function findRelatedFiles(tc: TestCase): Promise<string[]> {
   const entries = await readdir(tc.dir, { withFileTypes: true })
   return entries
-    .filter(e => e.isFile() && e.name.endsWith('.md') && 
+    .filter((e): e is import('fs').Dirent & { name: string } => 
+      e.isFile() && e.name.endsWith('.md') && 
       (e.name.replace(/\.md$/, '').startsWith(tc.name + '-') || e.name === tc.name + '.md'))
     .map(e => join(tc.dir, e.name))
     .sort()
