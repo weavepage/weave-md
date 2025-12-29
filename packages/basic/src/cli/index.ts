@@ -175,11 +175,38 @@ async function main() {
       process.exit(1);
     }
     const outDir = args.find((a: string) => a.startsWith('--out='))?.split('=')[1] || './dist';
-    const entryArg = args.find((a: string) => a.startsWith('--entry='))?.split('=')[1];
+    let entryArg = args.find((a: string) => a.startsWith('--entry='))?.split('=')[1];
     const cwd = process.cwd();
     
     console.log('Loading workspace...');
     const { sections, filePaths, rawContent } = await loadWorkspace(cwd);
+    
+    // Auto-detect entry if only one .md file in root directory
+    if (!entryArg && subcommand === 'html') {
+      const rootMdFiles = fs.readdirSync(cwd)
+        .filter(f => f.endsWith('.md') && fs.statSync(path.join(cwd, f)).isFile());
+      
+      if (rootMdFiles.length === 1) {
+        // Find the section from this file
+        for (const [id, filePath] of filePaths) {
+          if (path.resolve(path.dirname(filePath)) === path.resolve(cwd)) {
+            entryArg = id;
+            break;
+          }
+        }
+        if (!entryArg) {
+          console.error(`Error: Root file ${rootMdFiles[0]} has no valid id in frontmatter.`);
+          process.exit(1);
+        }
+      } else if (rootMdFiles.length > 1) {
+        console.error('Error: Multiple .md files in root directory. Use --entry=<id> to specify the primary section.');
+        console.error(`Found: ${rootMdFiles.join(', ')}`);
+        process.exit(1);
+      } else {
+        console.error('Error: No .md file in root directory. Use --entry=<id> to specify the primary section.');
+        process.exit(1);
+      }
+    }
     
     console.log(`Found ${sections.length} sections`);
     

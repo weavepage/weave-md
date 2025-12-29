@@ -57,9 +57,17 @@ npm test
 ### Export a Document
 
 ```bash
-cd packages/basic
-pnpm build
-./dist/cli/index.js export --out=./output
+# Export to HTML
+weave-md-basic export html --entry=intro
+
+# Export to JSON AST
+weave-md-basic export ast
+```
+
+**HTML entry point:** If exactly one `.md` file exists in the root directory, `--entry` is auto-detected:
+
+```bash
+weave-md-basic export html
 ```
 
 ## Packages
