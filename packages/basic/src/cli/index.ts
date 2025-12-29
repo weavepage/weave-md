@@ -175,6 +175,7 @@ async function main() {
       process.exit(1);
     }
     const outDir = args.find((a: string) => a.startsWith('--out='))?.split('=')[1] || './dist';
+    const entryArg = args.find((a: string) => a.startsWith('--entry='))?.split('=')[1];
     const cwd = process.cwd();
     
     console.log('Loading workspace...');
@@ -247,7 +248,8 @@ async function main() {
       }
       
       const html = exportToStaticHtml(sections, trees, {
-        title: 'Weave Document'
+        title: 'Weave Document',
+        entry: entryArg
       });
       
       fs.writeFileSync(path.join(outDir, 'index.html'), html);
@@ -283,13 +285,14 @@ Export formats:
 
 Options:
   --out=<dir>           Output directory (default: ./dist)
+  --entry=<id>          Entry section ID (only render this and its references)
   --strict              Exit with code 1 if validation errors found
   --json                Output validation results as JSON
 
 Examples:
   weave-md-basic validate
   weave-md-basic validate --strict
-  weave-md-basic export html
+  weave-md-basic export html --entry=intro
   weave-md-basic export html --out=./build
   weave-md-basic export ast
 `);

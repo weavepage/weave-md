@@ -11,7 +11,7 @@ export interface ToHtmlOptions {
   /** Render math using KaTeX (default: true) */
   renderMath?: boolean
   /** Custom handler for node links */
-  nodeLinksHandler?: (ref: NodeRef, text: string, footnoteNumber?: number) => string
+  nodeLinksHandler?: (ref: NodeRef, text: string, footnoteNumber?: number, refInstance?: number) => string
   /** 
    * Default display mode for node links without explicit display param.
    * 'footnote' is recommended for email-friendly output.
@@ -19,6 +19,8 @@ export interface ToHtmlOptions {
   defaultDisplay?: DisplayType
   /** Section content lookup for rendering footnotes/inline content */
   sections?: Map<string, Section> | Record<string, Section>
+  /** Skip rendering footnotes section at bottom (for inline/overlay content) */
+  skipFootnotesSection?: boolean
 }
 
 /**
@@ -26,7 +28,7 @@ export interface ToHtmlOptions {
  * Handles Weave-specific node types (weaveNodeLink, weaveMathBlock, weaveMediaBlock, etc.)
  */
 export function toHtml(tree: Root, options: ToHtmlOptions = {}): string {
-  const { renderMath = true, nodeLinksHandler, defaultDisplay, sections } = options
+  const { renderMath = true, nodeLinksHandler, defaultDisplay, sections, skipFootnotesSection = false } = options
   
   // Clone tree to avoid mutating original
   const workingTree = JSON.parse(JSON.stringify(tree)) as Root
@@ -53,9 +55,9 @@ export function toHtml(tree: Root, options: ToHtmlOptions = {}): string {
     allowDangerousHtml: true
   })
   
-  // Append footnotes section if any were collected
-  if (footnotes.length > 0) {
-    html += renderFootnotesSection(footnotes, sections)
+  // Append footnotes section if any were collected (unless skipped for inline/overlay content)
+  if (footnotes.length > 0 && !skipFootnotesSection) {
+    html += renderFootnotesSection(footnotes)
   }
   
   return html
@@ -68,12 +70,23 @@ function transformWeaveNodesToHtml(
   tree: Root, 
   options: { 
     renderMath: boolean
-    nodeLinksHandler?: (ref: NodeRef, text: string, footnoteNumber?: number) => string
+    nodeLinksHandler?: (ref: NodeRef, text: string, footnoteNumber?: number, refInstance?: number) => string
     defaultDisplay?: DisplayType
     sections?: Map<string, Section> | Record<string, Section>
     footnotes: Array<{ ref: NodeRef; text: string; content?: string }>
+    footnoteMap?: Map<string, number>
+    footnoteRefCount?: Map<number, number>
   }
 ): void {
+  // Track which nodes have already been assigned footnote numbers
+  if (!options.footnoteMap) {
+    options.footnoteMap = new Map()
+  }
+  // Track reference instance count per footnote number
+  if (!options.footnoteRefCount) {
+    options.footnoteRefCount = new Map()
+  }
+  
   // Transform weaveNodeLink to standard link or HTML
   visit(tree, 'weaveNodeLink', (node: any, index, parent) => {
     if (index === undefined || !parent) return
@@ -93,26 +106,39 @@ function transformWeaveNodesToHtml(
     
     // Handle footnote display mode
     if (display === 'footnote') {
-      const footnoteNum = options.footnotes.length + 1
-      const section = getSection(options.sections, ref.id)
-      options.footnotes.push({ 
-        ref, 
-        text, 
-        content: section?.peek || section?.body?.slice(0, 200) 
-      })
+      // Check if this node already has a footnote number
+      let footnoteNum = options.footnoteMap!.get(ref.id)
+      
+      if (footnoteNum === undefined) {
+        // New footnote - assign next number
+        footnoteNum = options.footnotes.length + 1
+        options.footnoteMap!.set(ref.id, footnoteNum)
+        const section = getSection(options.sections, ref.id)
+        options.footnotes.push({ 
+          ref, 
+          text, 
+          content: section?.peek || section?.body?.slice(0, 200) 
+        })
+      }
+      
+      // Track reference instance for unique IDs
+      const currentCount = options.footnoteRefCount!.get(footnoteNum) || 0
+      const refInstance = currentCount + 1
+      options.footnoteRefCount!.set(footnoteNum, refInstance)
       
       if (options.nodeLinksHandler) {
         parent.children[index] = {
           type: 'html',
-          value: options.nodeLinksHandler(ref, text, footnoteNum)
+          value: options.nodeLinksHandler(ref, text, footnoteNum, refInstance)
         } as any
       } else {
         // Render as footnote reference: text[1]
         // For empty anchor [ ], don't render the space
         const displayText = text.trim() === '' ? '' : escapeHtml(text)
+        const refId = refInstance === 1 ? `fnref-${footnoteNum}` : `fnref-${footnoteNum}-${refInstance}`
         parent.children[index] = {
           type: 'html',
-          value: `${displayText}<sup class="weave-footnote-ref"><a href="#weave-fn-${footnoteNum}" id="weave-fnref-${footnoteNum}">[${footnoteNum}]</a></sup>`
+          value: `${displayText}<sup class="weave-footnote-ref"><a href="#fn-${footnoteNum}" id="${refId}">[${footnoteNum}]</a></sup>`
         } as any
       }
       return SKIP
@@ -168,13 +194,15 @@ function transformWeaveNodesToHtml(
   })
   
   // Transform weavePreformatted to HTML
+  // Uses div instead of pre so markdown can be processed, CSS handles whitespace
   visit(tree, 'weavePreformatted', (node: any, index, parent) => {
     if (index === undefined || !parent) return
     
+    // For now, preserve as text with spacing - markdown processing would require parser changes
     const escaped = escapeHtml(node.value)
     parent.children[index] = {
       type: 'html',
-      value: `<pre class="weave-preformatted">${escaped}</pre>`
+      value: `<div class="weave-preformatted">${escaped}</div>`
     } as any
     return SKIP
   })
@@ -226,16 +254,15 @@ function getSection(
  * Render footnotes section at end of document
  */
 function renderFootnotesSection(
-  footnotes: Array<{ ref: NodeRef; text: string; content?: string }>,
-  sections?: Map<string, Section> | Record<string, Section>
+  footnotes: Array<{ ref: NodeRef; text: string; content?: string }>
 ): string {
   if (footnotes.length === 0) return ''
   
   const items = footnotes.map((fn, i) => {
     const num = i + 1
     const content = fn.content ? escapeHtml(fn.content) : `[${escapeHtml(fn.ref.id)}]`
-    return `<li id="weave-fn-${num}" class="weave-footnote">
-      <p><a href="#weave-fnref-${num}" class="weave-footnote-backref">[${num}]</a> ${content}</p>
+    return `<li id="fn-${num}" class="weave-footnote">
+      <p><a href="#fnref-${num}" class="weave-footnote-backref">[${num}]</a> ${content}</p>
     </li>`
   }).join('\n')
   
@@ -265,10 +292,12 @@ function escapeHtml(str: string): string {
  */
 function createMediaHtml(mediaType: string, config: Record<string, unknown>): string {
   const esc = escapeHtml
+  // Support both 'file' (spec) and 'src' (legacy) field names
+  const getFile = () => esc(String(config.file || config.src || ''))
   
   switch (mediaType) {
     case 'image': {
-      const src = esc(String(config.src || ''))
+      const src = getFile()
       const alt = esc(String(config.alt || ''))
       const caption = config.caption ? `<figcaption>${esc(String(config.caption))}</figcaption>` : ''
       return `<figure class="weave-media weave-image"><img src="${src}" alt="${alt}">${caption}</figure>`
@@ -276,30 +305,43 @@ function createMediaHtml(mediaType: string, config: Record<string, unknown>): st
     
     case 'gallery': {
       const files = (config.files as any[]) || []
-      const images = files.map(f => 
-        `<figure><img src="${esc(String(f.src || ''))}" alt="${esc(String(f.alt || ''))}"></figure>`
-      ).join('')
-      return `<div class="weave-media weave-gallery">${images}</div>`
+      // Support both URL strings and {file/src:} objects
+      const images = files.map(f => {
+        const src = typeof f === 'string' ? esc(f) : esc(String(f.file || f.src || ''))
+        const alt = typeof f === 'string' ? '' : esc(String(f.alt || ''))
+        return `<figure><img src="${src}" alt="${alt}"></figure>`
+      }).join('')
+      const caption = config.caption ? `<figcaption>${esc(String(config.caption))}</figcaption>` : ''
+      return `<div class="weave-media weave-gallery">${images}${caption}</div>`
     }
     
     case 'audio': {
-      const src = esc(String(config.src || ''))
-      return `<figure class="weave-media weave-audio"><audio src="${src}" controls></audio></figure>`
+      const src = getFile()
+      const autoplay = config.autoplay ? ' autoplay' : ''
+      const loop = config.loop ? ' loop' : ''
+      const controls = config.controls !== false ? ' controls' : ''
+      return `<figure class="weave-media weave-audio"><audio src="${src}"${controls}${autoplay}${loop}></audio></figure>`
     }
     
     case 'video': {
-      const src = esc(String(config.src || ''))
+      const src = getFile()
       const poster = config.poster ? ` poster="${esc(String(config.poster))}"` : ''
-      return `<figure class="weave-media weave-video"><video src="${src}"${poster} controls></video></figure>`
+      const autoplay = config.autoplay ? ' autoplay' : ''
+      const loop = config.loop ? ' loop' : ''
+      const controls = config.controls !== false ? ' controls' : ''
+      const start = config.start ? ` data-start="${esc(String(config.start))}"` : ''
+      return `<figure class="weave-media weave-video"><video src="${src}"${poster}${controls}${autoplay}${loop}${start}></video></figure>`
     }
     
     case 'embed': {
       const url = esc(String(config.url || ''))
-      return `<figure class="weave-media weave-embed"><iframe src="${url}" frameborder="0" allowfullscreen></iframe></figure>`
+      const width = config.width ? ` width="${esc(String(config.width))}"` : ''
+      const height = config.height ? ` height="${esc(String(config.height))}"` : ''
+      return `<figure class="weave-media weave-embed"><iframe src="${url}"${width}${height} frameborder="0" allowfullscreen></iframe></figure>`
     }
     
     case 'voiceover': {
-      const src = esc(String(config.src || ''))
+      const src = getFile()
       return `<aside class="weave-media weave-voiceover"><audio src="${src}" controls></audio></aside>`
     }
     

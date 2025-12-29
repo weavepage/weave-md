@@ -1,6 +1,6 @@
 export * from './load/index.js';
-export { exportToStaticHtml } from './render/index.js';
-export type { StaticHtmlOptions } from './render/index.js';
+export { exportToStaticHtml, toHtml, exportToHtml, exportToAppendix } from './render/index.js';
+export type { StaticHtmlOptions, ToHtmlOptions, ExportOptions } from './render/index.js';
 
 // Re-export parse types for convenience
 export type {

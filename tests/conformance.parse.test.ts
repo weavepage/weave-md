@@ -50,7 +50,7 @@ describe('conformance (parse)', async () => {
     if (!tc.ast) continue
 
     it(`${tc.suite}/${tc.name} - AST`, async () => {
-      const { parseWeaveDocument, stripPositionsFromAst } = await import('@weave-md/parse')
+      const { parseWeaveDocument, stripDebugInfoFromAst } = await import('@weave-md/parse')
       const input = await readFile(tc.input, 'utf-8')
       const expected = JSON.parse(await readFile(tc.ast!, 'utf-8'))
 
@@ -62,7 +62,7 @@ describe('conformance (parse)', async () => {
         throw new Error('Unexpected parse error')
       }
 
-      stripPositionsFromAst(ast)
+      stripDebugInfoFromAst(ast)
       expect({ sections: ast.sections, links: ast.links }).toEqual(expected)
     })
   }

@@ -50,7 +50,7 @@ See [this section](node:other-section?display=footnote) for more.`
     const html = toHtml(tree)
 
     expect(html).toContain('weave-footnote-ref')
-    expect(html).toContain('weave-fn-1')
+    expect(html).toContain('fn-1')
   })
 
   it('renders math blocks with KaTeX', () => {
@@ -293,7 +293,6 @@ Note content.`
     expect(html).toContain('weave-footnote-ref')
     expect(html).toContain('weave-overlay')
     expect(html).toContain('openOverlay')
-    expect(html).toContain('mouseover') // Hover support
   })
 
   it('renders empty overlay links as icons', () => {
@@ -320,7 +319,7 @@ Detail content.`).tree)
 
     expect(html).toContain('weave-overlay-anchor')
     expect(html).toContain('data-display="overlay"')
-    expect(html).toContain('>i</span>') // Icon content
+    expect(html).toContain('weave-icon') // SVG icon
   })
 
   it('includes section data for overlay rendering', () => {

@@ -91,7 +91,7 @@ function findBodyStartOffset(source: string, frontmatterNode?: { position?: { en
 export function stripDebugInfoFromAst(ast: WeaveAst): void {
   delete ast.diagnostics
   for (const link of ast.links) {
-    (link as any).start = { line: 0, character: 0 };
-    (link as any).end = { line: 0, character: 0 }
+    delete (link as any).start
+    delete (link as any).end
   }
 }
