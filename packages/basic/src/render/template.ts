@@ -91,7 +91,8 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
     }
 
     .weave-inline-trigger.expanded {
-      font-weight: 600;
+      background: #e8f4ff;
+      border-bottom: 2px solid #0066cc;
     }
 
     .weave-inline-content {
@@ -162,65 +163,95 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       color: #0066cc;
     }
 
-    /* Overlay */
+    /* Overlay - bigfoot-style tooltip */
     .weave-overlay {
-      display: none;
-      position: absolute;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      max-width: 24rem;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-      z-index: 1000;
-      margin-top: 0.5rem;
+      position: fixed;
+      z-index: 10000;
+      box-sizing: border-box;
+      max-width: min(22rem, calc(100vw - 20px));
+      display: inline-block;
+      background: #fafafa;
+      border-radius: 0.5em;
+      border: 1px solid #c3c3c3;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: scale(0.1) translateZ(0);
+      transform-origin: 50% 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
     }
 
     .weave-overlay.active {
-      display: block;
+      opacity: 0.97;
+      transform: scale(1) translateZ(0);
+      pointer-events: auto;
+    }
+
+    .weave-overlay.above {
+      transform-origin: 50% 100%;
+    }
+
+    /* Tooltip arrow */
+    .weave-overlay-tooltip {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+    }
+
+    .weave-overlay.below .weave-overlay-tooltip {
+      top: -10px;
+      border-bottom: 10px solid #c3c3c3;
+    }
+
+    .weave-overlay.below .weave-overlay-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: -9px;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 9px solid #fafafa;
+    }
+
+    .weave-overlay.above .weave-overlay-tooltip {
+      bottom: -10px;
+      border-top: 10px solid #c3c3c3;
+    }
+
+    .weave-overlay.above .weave-overlay-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: -9px;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 9px solid #fafafa;
     }
 
     .weave-overlay-content {
       position: relative;
     }
 
-    .weave-overlay-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    .weave-overlay-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .weave-overlay-close {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #666;
-      padding: 0;
-      width: 2rem;
-      height: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-    }
-
-    .weave-overlay-close:hover {
-      background: #f0f0f0;
-      color: #333;
+    .weave-overlay-main-wrapper {
+      max-height: 15em;
+      overflow: auto;
     }
 
     .weave-overlay-body {
-      line-height: 1.6;
+      padding: 0.6em 0.8em;
+      line-height: 1.5;
+      font-size: 0.95em;
+      color: #333;
+    }
+
+    .weave-overlay-body p {
+      margin: 0;
+    }
+
+    .weave-overlay-body p + p {
+      margin-top: 0.5em;
     }
 
     /* Math blocks */
@@ -274,15 +305,6 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       body {
         padding: 1rem 0.75rem;
       }
-
-      .weave-overlay {
-        padding: 1rem;
-      }
-
-      .weave-overlay-content {
-        padding: 1.5rem;
-        margin: 1rem auto;
-      }
     }
   </style>
 </head>
@@ -293,13 +315,10 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
 
   <!-- Overlay container -->
   <div class="weave-overlay" id="weave-overlay">
-    <div class="weave-overlay-content">
-      <div class="weave-overlay-header">
-        <h3 class="weave-overlay-title" id="weave-overlay-title"></h3>
-        <button class="weave-overlay-close" id="weave-overlay-close" aria-label="Close">&times;</button>
-      </div>
+    <div class="weave-overlay-main-wrapper">
       <div class="weave-overlay-body" id="weave-overlay-body"></div>
     </div>
+    <div class="weave-overlay-tooltip" id="weave-overlay-tooltip"></div>
   </div>
 
   <script>
@@ -308,74 +327,105 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
 
     // Overlay handling
     const overlay = document.getElementById('weave-overlay');
-    const overlayTitle = document.getElementById('weave-overlay-title');
     const overlayBody = document.getElementById('weave-overlay-body');
-    const overlayClose = document.getElementById('weave-overlay-close');
 
     let currentTrigger = null;
+
+    const overlayTooltip = document.getElementById('weave-overlay-tooltip');
+
+    function positionOverlay() {
+      if (!currentTrigger) return;
+      
+      // Use getClientRects() to handle wrapped inline elements
+      // Pick the last rect (end of link) for better UX
+      const rects = currentTrigger.getClientRects();
+      const rect = rects.length > 0 ? rects[rects.length - 1] : currentTrigger.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Use content container bounds instead of viewport for horizontal positioning
+      // This keeps overlay within content area, leaving margins free for side notes
+      const container = document.querySelector('.weave-document');
+      const containerRect = container.getBoundingClientRect();
+      
+      const overlayHeight = overlay.offsetHeight;
+      const overlayWidth = overlay.offsetWidth;
+      
+      // Trigger center is the anchor - arrow MUST point here
+      const triggerCenterX = rect.left + (rect.width / 2);
+      
+      // Check space above and below
+      const spaceBelow = viewportHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const showBelow = spaceBelow >= overlayHeight + 15 || spaceBelow > spaceAbove;
+      
+      const arrowMinEdge = 15; // min distance from arrow center to overlay edge
+      const screenEdgePadding = 8; // minimum distance from screen edge for shadow visibility
+      
+      // Bounds: prefer container, but always keep minimum distance from screen edges
+      const boundsLeft = Math.max(screenEdgePadding, containerRect.left);
+      const boundsRight = Math.min(window.innerWidth - screenEdgePadding, containerRect.right);
+      
+      // Position overlay so arrow can reach the trigger
+      // Arrow must be at triggerCenterX, and arrow must be within [arrowMinEdge, overlayWidth - arrowMinEdge]
+      let leftMin = triggerCenterX - (overlayWidth - arrowMinEdge);
+      let leftMax = triggerCenterX - arrowMinEdge;
+      
+      // Start centered on trigger
+      let left = triggerCenterX - (overlayWidth / 2);
+      
+      // Ensure arrow can reach trigger (clamp to valid range)
+      left = Math.max(leftMin, Math.min(leftMax, left));
+      
+      // Now clamp to container bounds
+      // Clamp right first, then left (left takes priority so shadow is visible)
+      if (left + overlayWidth > boundsRight) {
+        left = boundsRight - overlayWidth;
+      }
+      if (left < boundsLeft) {
+        left = boundsLeft;
+      }
+      
+      overlay.style.left = left + 'px';
+      
+      // Arrow position = trigger center relative to overlay left edge
+      const arrowLeftPx = triggerCenterX - left;
+      overlayTooltip.style.left = arrowLeftPx + 'px';
+      overlayTooltip.style.transform = 'translateX(-50%)';
+      
+      // Position vertically
+      overlay.classList.remove('above', 'below');
+      if (showBelow) {
+        overlay.style.top = (rect.bottom + 10) + 'px';
+        overlay.classList.add('below');
+      } else {
+        overlay.style.top = (rect.top - overlayHeight - 10) + 'px';
+        overlay.classList.add('above');
+      }
+    }
 
     function openOverlay(sectionId, triggerElement) {
       const section = sections[sectionId];
       if (!section) return;
 
-      overlayTitle.textContent = section.title || sectionId;
       overlayBody.innerHTML = section.html;
-      overlay.classList.add('active');
-      
-      // Get the main document container bounds
-      const container = document.querySelector('.weave-document');
-      const containerRect = container.getBoundingClientRect();
-      const rect = triggerElement.getBoundingClientRect();
-      const overlayHeight = overlay.offsetHeight;
-      const overlayWidth = overlay.offsetWidth;
-      
-      // Calculate positions relative to container
-      const containerScrollTop = container.scrollTop || 0;
-      const relativeTop = rect.top - containerRect.top + window.scrollY;
-      const relativeLeft = rect.left - containerRect.left;
-      
-      // Check if there's more space above or below within container
-      const spaceBelow = containerRect.bottom - rect.bottom;
-      const spaceAbove = rect.top - containerRect.top;
-      
-      // Position horizontally - center in container, but ensure trigger is within overlay bounds
-      const containerWidth = containerRect.width;
-      const triggerCenter = relativeLeft + (rect.width / 2);
-      
-      // Try to center the overlay in the container
-      let left = (containerWidth - overlayWidth) / 2;
-      
-      // Ensure the trigger element is within or near the overlay bounds
-      const overlayLeft = left;
-      const overlayRight = left + overlayWidth;
-      
-      // If trigger is to the left of overlay, shift overlay left
-      if (triggerCenter < overlayLeft) {
-        left = Math.max(0, triggerCenter - 20);
-      }
-      // If trigger is to the right of overlay, shift overlay right
-      else if (triggerCenter > overlayRight) {
-        left = Math.min(containerWidth - overlayWidth, triggerCenter - overlayWidth + 20);
-      }
-      
-      // Final bounds check
-      left = Math.max(0, Math.min(left, containerWidth - overlayWidth));
-      
-      overlay.style.left = left + 'px';
-      
-      // Position vertically (above or below based on space within container)
-      if (spaceBelow >= overlayHeight + 10 || spaceBelow > spaceAbove) {
-        // Position below
-        overlay.style.top = (relativeTop + rect.height + 8) + 'px';
-        overlay.style.bottom = 'auto';
-      } else {
-        // Position above
-        overlay.style.top = (relativeTop - overlayHeight - 8) + 'px';
-        overlay.style.bottom = 'auto';
-      }
-      
       currentTrigger = triggerElement;
+      
+      overlay.classList.add('active');
+      positionOverlay();
     }
+
+    // Reposition on scroll/resize to keep arrow attached
+    window.addEventListener('scroll', () => {
+      if (overlay.classList.contains('active')) {
+        positionOverlay();
+      }
+    }, true);
+    
+    window.addEventListener('resize', () => {
+      if (overlay.classList.contains('active')) {
+        positionOverlay();
+      }
+    });
 
     function closeOverlay() {
       overlay.classList.remove('active');
@@ -383,7 +433,6 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
     }
 
     // Click handlers
-    overlayClose.addEventListener('click', closeOverlay);
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeOverlay();
     });
