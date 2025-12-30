@@ -40,7 +40,7 @@ Used when inline text is the **explicit affordance**.
 - `[ ]` denotes an **anchor-only** reference (no author-supplied affordance).
 - `[text]` denotes an **explicit affordance**.
 - If interaction is required and `[ ]` is used, the **renderer MUST supply an affordance**.
-- Numbering is **semantic and system-assigned**, never authored.
+- Sequence markers are **semantic and system-assigned**, never authored.
 - Renderers MUST NOT render the space in `[ ]`.
 - Empty `[]` is not valid CommonMark and MUST NOT be used unless explicitly supported as a parser extension.
 
@@ -48,47 +48,47 @@ Used when inline text is the **explicit affordance**.
 
 ## 1. Footnote Node
 
-**Numbered reference optionally rendered at the bottom.**
+**Ordered reference optionally rendered at the bottom.**
 
 ```md
 ...sentence.[ ](node:fn1?display=footnote)
 [This claim](node:fn1?display=footnote)
 ```
 
-- Always numbered
-- Text-linked form appends the number to the text
+- Always ordered
+- Text-linked form appends the sequence marker to the text
 - Hover/click preview optional
 
 ---
 
 ## 2. Sidenote Node
 
-**Numbered reference rendered in the margin.**
+**Ordered reference rendered in the margin.**
 
 ```md
 ...sentence.[ ](node:sn1?display=sidenote)
 [This claim](node:sn1?display=sidenote)
 ```
 
-- Always numbered
+- Always ordered
 - Margin placement on desktop
 - Click may highlight anchor location
-- Mobile fallback: overlay
+- Mobile fallback required
 
 ---
 
 ## 3. Margin Note Node
 
-**Unnumbered annotation rendered in the margin.**
+**Unordered annotation rendered in the margin.**
 
 ```md
 ...sentence.[ ](node:mn1?display=margin)
 [context](node:mn1?display=margin)
 ```
 
-- Never numbered
+- Never ordered
 - Anchor-only margin notes may render with no inline marker
-- Mobile fallback: inline at end of paragraph (unless disabled)
+- Mobile fallback required
 
 ---
 
@@ -133,39 +133,38 @@ Used when inline text is the **explicit affordance**.
 - Always expandable / collapsible
 - Supports nesting
 - Renderer must supply an affordance for anchor-only references
-- Mobile UI may vary, semantics unchanged
+- Mobile fallback may be required
 
 ---
 
 ## 7. Page Node
 
-**Node resolved as a full page or section view.**
+**Content rendered in a persistent, dismissible view.**
 
 ```md
 [Read more](node:topic?display=page)
 [ ](node:topic?display=page)
 ```
 
-- Renderer must supply a navigation affordance for anchor-only references
-- May open as:
-  - stacked / overlay page (Gwern-style)
-  - same tab
-  - new tab
-- Semantics are “resolve as page,” not “navigate away”
+- No browser navigation — content appears on the current page
+- View persists until explicitly dismissed or collapsed
+- Size and presentation are renderer-defined
+- Renderer must supply an affordance for anchor-only references
+- Mobile fallback required
 
 ---
 
 ## Summary Chart
 
-| Display | Numbered | Anchor-only behavior (`[ ]`) | Primary Placement / Behavior |
+| Display | Ordered | Anchor-only behavior (`[ ]`) | Primary Placement / Behavior |
 |---------|----------|------------------------------|------------------------------|
-| footnote | yes | Renderer renders number marker | Bottom/end footnote |
-| sidenote | yes | Renderer renders number marker | Margin note (fallback overlay) |
-| margin | no | Renderer only creates margin note | Margin note (fallback inline) |
+| footnote | yes | Renderer renders sequence marker | Bottom/end footnote |
+| sidenote | yes | Renderer renders sequence marker | Margin note |
+| margin | no | Renderer only creates margin note | Margin note |
 | overlay | no | Renderer supplies trigger | Floating layer |
 | inline | no | Renderer supplies expander | In-flow expandable block |
 | stretch | no | Renderer supplies expander | Nested expandable block |
-| page | no | Renderer supplies navigation | Page / stacked page view |
+| page | no | Renderer supplies affordance | Persistent section view |
 
 ---
 
