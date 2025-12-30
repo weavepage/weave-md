@@ -48,7 +48,7 @@ Used when inline text is the **explicit affordance**.
 
 ## 1. Footnote Node
 
-**Ordered reference optionally rendered at the bottom.**
+**Ordered reference, *optionally* rendered at the bottom.**
 
 ```md
 ...sentence.[ ](node:fn1?display=footnote)
