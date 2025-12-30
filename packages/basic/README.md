@@ -10,15 +10,36 @@ pnpm add @weave-md/basic
 
 ## CLI
 
+### Export
+
+```bash
+weave-md-basic export html --entry=intro   # Export to HTML
+weave-md-basic export ast                  # Export to JSON AST
+```
+
+**HTML entry point:** If exactly one `.md` file exists in the root directory, `--entry` is auto-detected:
+
+```bash
+weave-md-basic export html
+```
+
+**Output:** Use `--out` to specify output directory:
+
+```bash
+weave-md-basic export html --out=./build
+```
+
+### Validate
+
 ```bash
 weave-md-basic validate              # Check for errors
 weave-md-basic validate --strict     # Exit 1 on errors
 weave-md-basic validate --json       # JSON output
+```
 
-weave-md-basic export html --entry=intro    # Export starting from entry section
-weave-md-basic export html --out=./build
-weave-md-basic export ast                   # Export to JSON AST
+### Help
 
+```bash
 weave-md-basic help
 ```
 
