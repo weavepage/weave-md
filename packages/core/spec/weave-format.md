@@ -95,6 +95,19 @@ The formula :math[E = mc^2] shows the relationship.
 
 **Note on Syntax Choice**: We use `:math[...]` for inline math rather than the `$...$` syntax common in LaTeX because single dollar signs can conflict with currency notation and other content. The `:math[...]` syntax provides explicit delimiters that integrate cleanly with Markdown parsing.
 
+### Inline Substitution
+
+Use the `:sub[INITIAL]{REPLACEMENT}` syntax for inline substitution:
+
+```markdown
+The :sub[TL;DR]{full explanation that appears after activation} summarizes the point.
+```
+
+**Behavior**:
+- Initially renders `INITIAL`; on activation, replaces the span with `REPLACEMENT`
+- After activation, the element is no longer interactive (one-way)
+- Nested `:sub` inside `REPLACEMENT` is allowed
+
 ## Media Elements
 
 All media elements use YAML structure inside fenced code blocks to specify their properties. Required fields must be present for valid parsing, while optional fields provide additional configuration.
@@ -113,13 +126,13 @@ width: normal
 ```
 ````
 
-Image Fields:
+**Image Fields**:
 - `file` (required) — Image URL or file reference
 - `alt` — Alternative text for accessibility (optional)
 - `caption` — Caption displayed with the image (optional)
 - `width` — Display width hint (optional). Common values include `normal`, `wide`, `full`, but implementations MAY accept any string value.
 
-Behavior:
+**Behavior**:
 - Renders as a semantic image block
 - If caption is present, it SHOULD be rendered as a caption
 - If alt is omitted, implementations MAY emit a warning but MUST still render
@@ -139,12 +152,12 @@ caption: Optional caption for the gallery
 ```
 ````
 
-Gallery Fields:
+**Gallery Fields**:
 - `files` (required) — List of image URLs or file references (MUST contain at least one entry)
 - `alt` — Alternative text describing the gallery as a whole (optional)
 - `caption` — Caption displayed with the gallery (optional)
 
-Behavior:
+**Behavior**:
 - Renders as a grouped visual unit
 - Layout (grid, carousel, etc.) is implementation-defined
 - If alt is omitted, implementations MAY emit a warning but MUST still render
@@ -162,7 +175,7 @@ loop: false
 ```
 ````
 
-Audio Fields:
+**Audio Fields**:
 - `file` (required) — Audio file URL or file reference
 - `autoplay` — Auto-play on load (optional, default: false)
 - `controls` — Show playback controls (optional, default: true)
@@ -183,7 +196,7 @@ loop: false
 ```
 ````
 
-Video Fields:
+**Video Fields**:
 - `file` (required) — Video file URL or file reference
 - `poster` — Thumbnail image URL (optional)
 - `start` — Start time in seconds (optional, default: 0)
@@ -201,10 +214,10 @@ url: https://example.com/widget
 ```
 ````
 
-Embed Fields:
+**Embed Fields**:
 - `url` (required) — URL of the content to embed
 
-Behavior:
+**Behavior**:
 - Creates an iframe or appropriate embed container for the URL
 
 ### Voiceover
@@ -217,8 +230,8 @@ file: https://example.com/voiceover.mp3
 ```
 ````
 
-Voiceover Fields:
+**Voiceover Fields**:
 - `file` (required) — Audio file URL or file reference for the voiceover
 
-Behavior:
+**Behavior**:
 - Embeds pre-recorded voiceover audio narration

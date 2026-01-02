@@ -38,6 +38,7 @@ Tests for Weave Format features:
 
 **Requirements:**
 - Parse Weave Format blocks (math, gallery, audio, video, etc.)
+- Parse inline extensions (`:math[...]`, `:sub[...]{...}`)
 - Preserve content and parameters in AST
 - Render appropriately when supported
 
