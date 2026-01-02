@@ -108,6 +108,8 @@ The :sub[TL;DR]{full explanation that appears after activation} summarizes the p
 - After activation, the element is no longer interactive (one-way)
 - Nested `:sub` inside `REPLACEMENT` is allowed
 
+**Note (Non-Normative)**: Implementations MAY allow collapsing a revealed `:sub` back to its initial state as a UI convenience.
+
 ## Media Elements
 
 All media elements use YAML structure inside fenced code blocks to specify their properties. Required fields must be present for valid parsing, while optional fields provide additional configuration.
