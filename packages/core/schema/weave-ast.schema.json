@@ -40,12 +40,6 @@
           "type": "string",
           "description": "Source file path. Used in workspace-level parsing to track which file contains this section."
         },
-        "extendedBlocks": {
-          "type": "array",
-          "items": {
-            "$ref": "https://weave-md.org/schema/weave-format.schema.json#/definitions/ExtendedBlock"
-          }
-        },
         "position": {
           "$ref": "#/definitions/SourcePosition",
           "description": "Start position of the section in source"
@@ -69,7 +63,7 @@
     },
     "Link": {
       "type": "object",
-      "description": "A node link occurrence with start and end positions.",
+      "description": "A node link occurrence. Position fields (start/end) are optional and may be stripped for conformance output.",
       "properties": {
         "ref": {
           "$ref": "#/definitions/NodeRef"
@@ -91,7 +85,7 @@
           "description": "ID of the section containing this link"
         }
       },
-      "required": ["ref", "sourceId", "start", "end", "text"]
+      "required": ["ref", "sourceId", "text"]
     },
     "NodeRef": {
       "type": "object",

@@ -3,7 +3,7 @@ export interface ImageBlock {
   file: string;
   alt?: string;
   caption?: string;
-  width?: 'normal' | 'wide' | 'full';
+  width?: string;
 }
 
 export interface GalleryBlock {
@@ -43,12 +43,17 @@ export interface VoiceoverBlock {
 
 export interface MathBlock {
   type: 'math';
-  content: string;
+  value: string;
 }
 
 export interface PreBlock {
   type: 'pre';
-  content: string;
+  value: string;
+}
+
+export interface InlineMath {
+  type: 'inlineMath';
+  value: string;
 }
 
 export interface Sub {
@@ -72,4 +77,5 @@ export type ExtendedBlock =
   | PreBlock;
 
 export type InlineExtension =
+  | InlineMath
   | Sub;

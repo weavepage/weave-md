@@ -2,15 +2,12 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://weave-md.org/schema/weave-format.schema.json",
   "title": "Weave Format Schema",
-  "description": "Schema definition for Weave format elements including blocks, inlines, and extended syntax",
+  "description": "Schema definition for Weave format elements. Block schemas (ImageBlock, etc.) define the structure of YAML content in fenced code blocks. Inline schemas (InlineMath, Sub) define mdast node structures produced by the parser.",
   "definitions": {
     "ImageBlock": {
       "type": "object",
+      "description": "YAML content for ```image blocks",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "image"
-        },
         "file": {
           "type": "string",
           "minLength": 1
@@ -23,19 +20,16 @@
         },
         "width": {
           "type": "string",
-          "enum": ["normal", "wide", "full"]
+          "description": "Display width hint. Common values: normal, wide, full. Implementations MAY accept any string."
         }
       },
-      "required": ["type", "file"],
+      "required": ["file"],
       "additionalProperties": true
     },
     "GalleryBlock": {
       "type": "object",
+      "description": "YAML content for ```gallery blocks",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "gallery"
-        },
         "files": {
           "type": "array",
           "items": {
@@ -51,16 +45,13 @@
           "type": "string"
         }
       },
-      "required": ["type", "files"],
+      "required": ["files"],
       "additionalProperties": true
     },
     "AudioBlock": {
       "type": "object",
+      "description": "YAML content for ```audio blocks",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "audio"
-        },
         "file": {
           "type": "string",
           "minLength": 1
@@ -78,16 +69,13 @@
           "default": false
         }
       },
-      "required": ["type", "file"],
+      "required": ["file"],
       "additionalProperties": true
     },
     "VideoBlock": {
       "type": "object",
+      "description": "YAML content for ```video blocks",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "video"
-        },
         "file": {
           "type": "string",
           "minLength": 1
@@ -114,52 +102,43 @@
           "default": false
         }
       },
-      "required": ["type", "file"],
+      "required": ["file"],
       "additionalProperties": true
     },
     "EmbedBlock": {
       "type": "object",
+      "description": "YAML content for ```embed blocks",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "embed"
-        },
         "url": {
           "type": "string",
           "format": "uri"
         }
       },
-      "required": ["type", "url"],
+      "required": ["url"],
       "additionalProperties": true
     },
     "VoiceoverBlock": {
       "type": "object",
+      "description": "YAML content for ```voiceover blocks",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "voiceover"
-        },
         "file": {
           "type": "string",
           "minLength": 1
         }
       },
-      "required": ["type", "file"],
+      "required": ["file"],
       "additionalProperties": true
     },
     "MathBlock": {
       "type": "object",
-      "description": "Block math using ```math fenced code block",
+      "description": "Content for ```math blocks (raw LaTeX, no YAML)",
       "properties": {
-        "type": {
+        "value": {
           "type": "string",
-          "const": "math"
-        },
-        "content": {
-          "type": "string"
+          "description": "The LaTeX math content"
         }
       },
-      "required": ["type", "content"]
+      "required": ["value"]
     },
     "InlineMath": {
       "type": "object",
@@ -169,11 +148,12 @@
           "type": "string",
           "const": "inlineMath"
         },
-        "content": {
-          "type": "string"
+        "value": {
+          "type": "string",
+          "description": "The math expression content (uses 'value' per mdast convention)"
         }
       },
-      "required": ["type", "content"]
+      "required": ["type", "value"]
     },
     "Sub": {
       "type": "object",
@@ -210,134 +190,14 @@
     },
     "PreBlock": {
       "type": "object",
+      "description": "Content for ```pre blocks (raw text, no YAML)",
       "properties": {
-        "type": {
+        "value": {
           "type": "string",
-          "const": "pre"
-        },
-        "content": {
-          "type": "string"
+          "description": "The preformatted text content"
         }
       },
-      "required": ["type", "content"]
-    },
-    "Strikethrough": {
-      "type": "object",
-      "description": "Inline strikethrough text using ~~text~~ syntax",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "strikethrough"
-        },
-        "content": {
-          "type": "string"
-        }
-      },
-      "required": ["type", "content"]
-    },
-    "TableCell": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string"
-        },
-        "align": {
-          "type": "string",
-          "enum": ["left", "center", "right"],
-          "description": "Cell alignment inherited from column definition"
-        }
-      },
-      "required": ["content"]
-    },
-    "TableRow": {
-      "type": "object",
-      "properties": {
-        "cells": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TableCell"
-          }
-        }
-      },
-      "required": ["cells"]
-    },
-    "Table": {
-      "type": "object",
-      "description": "GFM-style table with headers and optional column alignment",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "table"
-        },
-        "header": {
-          "$ref": "#/definitions/TableRow",
-          "description": "Header row defining column names"
-        },
-        "align": {
-          "type": "array",
-          "items": {
-            "type": ["string", "null"],
-            "enum": ["left", "center", "right", null]
-          },
-          "description": "Column alignments from the delimiter row"
-        },
-        "rows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TableRow"
-          },
-          "description": "Data rows"
-        }
-      },
-      "required": ["type", "header", "rows"]
-    },
-    "AutolinkLiteral": {
-      "type": "object",
-      "description": "Auto-linked URL or email address",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "autolink"
-        },
-        "linkType": {
-          "type": "string",
-          "enum": ["url", "email"],
-          "description": "Whether this is a URL or email autolink"
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Present when linkType is 'url'"
-        },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "description": "Present when linkType is 'email'"
-        }
-      },
-      "required": ["type", "linkType"],
-      "allOf": [
-        {
-          "if": {
-            "properties": { "linkType": { "const": "url" } },
-            "required": ["linkType"]
-          },
-          "then": {
-            "required": ["url"],
-            "not": { "required": ["email"] }
-          }
-        },
-        {
-          "if": {
-            "properties": { "linkType": { "const": "email" } },
-            "required": ["linkType"]
-          },
-          "then": {
-            "required": ["email"],
-            "not": { "required": ["url"] }
-          }
-        }
-      ]
+      "required": ["value"]
     },
     "ExtendedBlock": {
       "oneOf": [
@@ -348,14 +208,11 @@
         { "$ref": "#/definitions/EmbedBlock" },
         { "$ref": "#/definitions/VoiceoverBlock" },
         { "$ref": "#/definitions/MathBlock" },
-        { "$ref": "#/definitions/PreBlock" },
-        { "$ref": "#/definitions/Table" }
+        { "$ref": "#/definitions/PreBlock" }
       ]
     },
     "ExtendedInline": {
       "oneOf": [
-        { "$ref": "#/definitions/Strikethrough" },
-        { "$ref": "#/definitions/AutolinkLiteral" },
         { "$ref": "#/definitions/InlineMath" },
         { "$ref": "#/definitions/Sub" }
       ]
