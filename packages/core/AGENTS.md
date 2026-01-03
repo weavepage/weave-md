@@ -38,7 +38,7 @@ Reference other sections with the `node:` URL scheme:
 
 `[ ]` (space) is anchor-only syntax — the renderer supplies the affordance.
 
-**Display modes:** `footnote`, `sidenote`, `margin`, `overlay`, `inline`, `stretch`, `page`
+**Display modes:** `footnote`, `sidenote`, `margin`, `overlay`, `inline`, `stretch`, `panel`
 
 **Export hints:** `export=appendix`, `export=inline`, `export=omit`
 

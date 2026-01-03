@@ -5,7 +5,7 @@ Test various link rewriting scenarios:
 ## Display params should be stripped
 - [Inline link](#target) → becomes simple anchor
 - [Footnote link](#target) → becomes simple anchor
-- [Page link](#target) → becomes simple anchor
+- [Panel link](#target) → becomes simple anchor
 
 ## Unknown params should be stripped
 - [With unknown param](#target) → becomes simple anchor

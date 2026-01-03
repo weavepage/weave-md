@@ -12,7 +12,7 @@ export type DisplayType =
   | 'overlay'
   | 'inline'
   | 'stretch'
-  | 'page';
+  | 'panel';
 
 export type ExportHint = 'appendix' | 'inline' | 'omit';
 

@@ -23,5 +23,5 @@ In-flow expandable: [inline](node:target?display=inline)
 ## Stretch
 Nested expandable: [stretch](node:target?display=stretch)
 
-## Page
-Full page view: [page](node:target?display=page)
+## Panel
+Full panel view: [panel](node:target?display=panel)

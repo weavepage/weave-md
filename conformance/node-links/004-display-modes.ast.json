@@ -3,7 +3,7 @@
     {
       "id": "display-modes-test",
       "title": "All Display Modes Test",
-      "body": "Test all display modes defined in the spec:\n\n## Footnote\nNumbered reference: [footnote](node:target?display=footnote)\n\n## Sidenote\nMargin-placed numbered reference: [sidenote](node:target?display=sidenote)\n\n## Margin Note\nUnnumbered margin annotation: [margin note](node:target?display=margin)\n\n## Overlay\nFloating layer content: [overlay](node:target?display=overlay)\n\n## Inline\nIn-flow expandable: [inline](node:target?display=inline)\n\n## Stretch\nNested expandable: [stretch](node:target?display=stretch)\n\n## Page\nFull page view: [page](node:target?display=page)"
+      "body": "Test all display modes defined in the spec:\n\n## Footnote\nNumbered reference: [footnote](node:target?display=footnote)\n\n## Sidenote\nMargin-placed numbered reference: [sidenote](node:target?display=sidenote)\n\n## Margin Note\nUnnumbered margin annotation: [margin note](node:target?display=margin)\n\n## Overlay\nFloating layer content: [overlay](node:target?display=overlay)\n\n## Inline\nIn-flow expandable: [inline](node:target?display=inline)\n\n## Stretch\nNested expandable: [stretch](node:target?display=stretch)\n\n## Panel\nFull panel view: [panel](node:target?display=panel)"
     }
   ],
   "links": [
@@ -58,9 +58,9 @@
     {
       "ref": {
         "id": "target",
-        "display": "page"
+        "display": "panel"
       },
-      "text": "page",
+      "text": "panel",
       "sourceId": "display-modes-test"
     }
   ]

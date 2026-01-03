@@ -17,6 +17,6 @@ Inline anchor-only: [ ](node:inline1?display=inline)
 
 Stretch anchor-only: [ ](node:stretch1?display=stretch)
 
-Page anchor-only: [ ](node:page1?display=page)
+Panel anchor-only: [ ](node:panel1?display=panel)
 
 Mixed with text-linked: [explicit text](node:mixed?display=inline) and anchor-only [ ](node:mixed?display=inline).

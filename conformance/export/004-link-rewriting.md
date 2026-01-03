@@ -8,7 +8,7 @@ Test various link rewriting scenarios:
 ## Display params should be stripped
 - [Inline link](node:target?display=inline) → becomes simple anchor
 - [Footnote link](node:target?display=footnote) → becomes simple anchor
-- [Page link](node:target?display=page) → becomes simple anchor
+- [Panel link](node:target?display=panel) → becomes simple anchor
 
 ## Unknown params should be stripped
 - [With unknown param](node:target?unknown=value) → becomes simple anchor

@@ -102,7 +102,7 @@
         },
         "display": {
           "type": "string",
-          "enum": ["footnote", "sidenote", "margin", "overlay", "inline", "stretch", "page"]
+          "enum": ["footnote", "sidenote", "margin", "overlay", "inline", "stretch", "panel"]
         },
         "export": {
           "type": "string",

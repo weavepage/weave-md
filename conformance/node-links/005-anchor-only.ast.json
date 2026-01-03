@@ -3,7 +3,7 @@
     {
       "id": "anchor-only-test",
       "title": "Anchor-Only References Test",
-      "body": "Test the canonical anchor-only syntax using `[ ]`:\n\nFootnote anchor-only: [ ](node:fn1?display=footnote)\n\nSidenote anchor-only: [ ](node:sn1?display=sidenote)\n\nMargin note anchor-only: [ ](node:mn1?display=margin)\n\nOverlay anchor-only: [ ](node:overlay1?display=overlay)\n\nInline anchor-only: [ ](node:inline1?display=inline)\n\nStretch anchor-only: [ ](node:stretch1?display=stretch)\n\nPage anchor-only: [ ](node:page1?display=page)\n\nMixed with text-linked: [explicit text](node:mixed?display=inline) and anchor-only [ ](node:mixed?display=inline)."
+      "body": "Test the canonical anchor-only syntax using `[ ]`:\n\nFootnote anchor-only: [ ](node:fn1?display=footnote)\n\nSidenote anchor-only: [ ](node:sn1?display=sidenote)\n\nMargin note anchor-only: [ ](node:mn1?display=margin)\n\nOverlay anchor-only: [ ](node:overlay1?display=overlay)\n\nInline anchor-only: [ ](node:inline1?display=inline)\n\nStretch anchor-only: [ ](node:stretch1?display=stretch)\n\nPanel anchor-only: [ ](node:panel1?display=panel)\n\nMixed with text-linked: [explicit text](node:mixed?display=inline) and anchor-only [ ](node:mixed?display=inline)."
     }
   ],
   "links": [
@@ -57,8 +57,8 @@
     },
     {
       "ref": {
-        "id": "page1",
-        "display": "page"
+        "id": "panel1",
+        "display": "panel"
       },
       "text": "",
       "sourceId": "anchor-only-test"

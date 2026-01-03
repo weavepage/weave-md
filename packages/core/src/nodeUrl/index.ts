@@ -34,10 +34,10 @@ export function parseNodeUrl(href: string): ParseNodeUrlResult {
       
       const display = params.get('display');
       if (display) {
-        if (['footnote', 'sidenote', 'margin', 'overlay', 'inline', 'stretch', 'page'].includes(display)) {
+        if (['footnote', 'sidenote', 'margin', 'overlay', 'inline', 'stretch', 'panel'].includes(display)) {
           ref.display = display as DisplayType;
         } else {
-          return { success: false, error: `Invalid display value: ${display}. Must be one of: footnote, sidenote, margin, overlay, inline, stretch, page` };
+          return { success: false, error: `Invalid display value: ${display}. Must be one of: footnote, sidenote, margin, overlay, inline, stretch, panel` };
         }
       }
 

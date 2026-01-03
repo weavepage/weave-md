@@ -137,13 +137,13 @@ Used when inline text is the **explicit affordance**.
 
 ---
 
-## 7. Page Node
+## 7. Panel Node
 
 **Content rendered in a persistent, dismissible view.**
 
 ```md
-[Read more](node:topic?display=page)
-[ ](node:topic?display=page)
+[Read more](node:topic?display=panel)
+[ ](node:topic?display=panel)
 ```
 
 - No browser navigation — content appears on the current page
@@ -164,7 +164,7 @@ Used when inline text is the **explicit affordance**.
 | overlay | no | Renderer supplies trigger | Floating layer |
 | inline | no | Renderer supplies expander | In-flow expandable block |
 | stretch | no | Renderer supplies expander | Nested expandable block |
-| page | no | Renderer supplies affordance | Persistent section view |
+| panel | no | Renderer supplies affordance | Persistent section view |
 
 ---
 
