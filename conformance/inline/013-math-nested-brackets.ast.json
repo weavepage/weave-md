@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "math-nested-brackets",
+      "title": "Nested Brackets in Math",
+      "body": "Balanced brackets: :math[f(x) = [a, b]].\n\nMultiple nested: :math[A = [[1, 2], [3, 4]]].\n\nFunction with brackets: :math[\\sum_{i=0}^{n} [x_i]]."
+    }
+  ],
+  "links": []
+}

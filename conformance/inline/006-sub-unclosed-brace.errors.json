@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "type": "unclosed-inline-sub-brace",
+      "message": "Inline substitution syntax :sub[...]{...} has unclosed brace",
+      "line": 6
+    }
+  ]
+}

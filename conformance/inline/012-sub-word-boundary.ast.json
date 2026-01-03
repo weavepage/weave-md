@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "sub-word-boundary",
+      "title": "Word Boundary Requirement",
+      "body": "Valid (after space): text :sub[a]{b} more.\n\nValid (after punctuation): (:sub[a]{b}) and ,:sub[a]{b}.\n\nInvalid (after letter): word:sub[a]{b} should not match.\n\nInvalid (after digit): 123:sub[a]{b} should not match.\n\nInvalid (after underscore): test_:sub[a]{b} should not match."
+    }
+  ],
+  "links": []
+}

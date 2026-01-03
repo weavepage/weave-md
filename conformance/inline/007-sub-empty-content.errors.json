@@ -1,0 +1,28 @@
+{
+  "errors": [
+    {
+      "type": "empty-inline-sub-initial",
+      "severity": "warning",
+      "message": "Inline substitution syntax :sub[...]{...} has empty initial content",
+      "line": 6
+    },
+    {
+      "type": "empty-inline-sub-replacement",
+      "severity": "warning",
+      "message": "Inline substitution syntax :sub[...]{...} has empty replacement content",
+      "line": 8
+    },
+    {
+      "type": "empty-inline-sub-initial",
+      "severity": "warning",
+      "message": "Inline substitution syntax :sub[...]{...} has empty initial content",
+      "line": 10
+    },
+    {
+      "type": "empty-inline-sub-replacement",
+      "severity": "warning",
+      "message": "Inline substitution syntax :sub[...]{...} has empty replacement content",
+      "line": 10
+    }
+  ]
+}

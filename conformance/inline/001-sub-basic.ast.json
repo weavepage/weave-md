@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "sub-basic-test",
+      "title": "Basic Substitution Test",
+      "body": "The :sub[TL;DR]{full explanation} summarizes the point.\n\nHere is :sub[brief]{longer detailed content} inline."
+    }
+  ],
+  "links": []
+}

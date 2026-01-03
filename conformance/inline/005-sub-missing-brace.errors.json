@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "type": "missing-sub-replacement",
+      "message": "Inline substitution syntax :sub[...]{...} missing replacement braces",
+      "line": 6
+    }
+  ]
+}

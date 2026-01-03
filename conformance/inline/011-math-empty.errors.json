@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "type": "empty-inline-math",
+      "severity": "warning",
+      "message": "Inline math syntax :math[...] is empty",
+      "line": 6
+    },
+    {
+      "type": "empty-inline-math",
+      "severity": "warning",
+      "message": "Inline math syntax :math[...] is empty",
+      "line": 8
+    }
+  ]
+}

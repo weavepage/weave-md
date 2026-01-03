@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "math-word-boundary",
+      "title": "Word Boundary Requirement for Math",
+      "body": "Valid (after space): text :math[x^2] more.\n\nValid (after punctuation): (:math[x]) and ,:math[y].\n\nInvalid (after letter): word:math[x] should not match.\n\nInvalid (after digit): 123:math[x] should not match.\n\nInvalid (after underscore): test_:math[x] should not match."
+    }
+  ],
+  "links": []
+}

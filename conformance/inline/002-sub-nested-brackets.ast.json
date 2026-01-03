@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "sub-nested-brackets",
+      "title": "Nested Brackets in Substitution",
+      "body": "Balanced brackets: :sub[text [nested] more]{replacement}.\n\nBalanced braces: :sub[initial]{text {nested} more}.\n\nBoth nested: :sub[a [b] c]{x {y} z}."
+    }
+  ],
+  "links": []
+}

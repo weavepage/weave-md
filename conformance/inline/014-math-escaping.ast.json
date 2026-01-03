@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "math-escaping",
+      "title": "Escape Sequences in Math",
+      "body": "Escaped bracket: :math[x \\] y].\n\nEscaped backslash: :math[a \\\\ b].\n\nEscaped open bracket: :math[\\[ test]."
+    }
+  ],
+  "links": []
+}

@@ -7,6 +7,7 @@ This directory contains normative conformance tests for Weave Markdown implement
 Tests are organized by feature:
 
 - `format/` - Weave document format and structure tests
+- `inline/` - Inline syntax validation tests (`:sub`, `:math`)
 - `node-links/` - Node link parsing tests
 - `frontmatter/` - Frontmatter parsing tests
 - `graph/` - Graph extraction tests
@@ -49,6 +50,26 @@ Tests are organized by feature:
 | `001-two-sections` | Single section with links to self and undefined node |
 | `002-cycles` | Three-way cycle detection (A→B→C→A) |
 | `003-deep-cycle` | Five-node deep cycle detection |
+
+### inline/
+| Test | Description |
+|------|-------------|
+| `001-sub-basic` | Basic `:sub[INITIAL]{REPLACEMENT}` syntax |
+| `002-sub-nested-brackets` | Balanced nested brackets and braces |
+| `003-sub-escaping` | Escape sequences (`\]`, `\[`, `\}`, `\{`, `\\`) |
+| `004-sub-unclosed-bracket` | Unclosed bracket error |
+| `005-sub-missing-brace` | Missing replacement braces error |
+| `006-sub-unclosed-brace` | Unclosed brace error |
+| `007-sub-empty-content` | Empty initial/replacement warnings |
+| `008-sub-multiline` | Multiline not allowed (error) |
+| `009-math-basic` | Basic `:math[...]` syntax |
+| `010-math-unclosed` | Unclosed math bracket error |
+| `011-math-empty` | Empty math content warning |
+| `012-sub-word-boundary` | Word boundary requirement for `:sub` |
+| `013-math-nested-brackets` | Balanced nested brackets in math |
+| `014-math-escaping` | Escape sequences (`\]`, `\[`, `\\`) in math |
+| `015-math-word-boundary` | Word boundary requirement for `:math` |
+| `016-math-multiline` | Multiline not allowed for math (error) |
 
 ### export/
 | Test | Description |

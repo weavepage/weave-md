@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "type": "unclosed-inline-math",
+      "message": "Inline math syntax :math[...] has unclosed bracket",
+      "line": 6
+    }
+  ]
+}

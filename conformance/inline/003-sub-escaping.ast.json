@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "sub-escaping",
+      "title": "Escape Sequences in Substitution",
+      "body": "Escaped bracket in initial: :sub[text \\] more]{replacement}.\n\nEscaped brace in replacement: :sub[initial]{text \\} more}.\n\nEscaped backslash: :sub[a \\\\ b]{c \\\\ d}."
+    }
+  ],
+  "links": []
+}
