@@ -63,13 +63,20 @@ describe('conformance (validate)', async () => {
 
     if (tc.errors && !tc.ast && !tc.graph) {
       it(name, async () => {
-        const { parseFrontmatter } = await import('@weave-md/validate')
+        const { parseFrontmatter, validateInlineSyntax } = await import('@weave-md/validate')
         const input = await readFile(tc.input, 'utf-8')
         const expected = JSON.parse(await readFile(tc.errors!, 'utf-8'))
         const { frontmatter, diagnostics } = parseFrontmatter(input)
+        const inlineDiagnostics = validateInlineSyntax(input)
         const actualTypes: string[] = []
         if (!frontmatter?.id && expected.errors.some((e: any) => e.type === 'missing_required_field')) actualTypes.push('missing_required_field')
         if (diagnostics.some((d: any) => d.code === 'invalid-yaml') && expected.errors.some((e: any) => e.type === 'invalid_yaml')) actualTypes.push('invalid_yaml')
+        // Check inline syntax errors
+        for (const expectedError of expected.errors) {
+          if (inlineDiagnostics.some((d: any) => d.code === expectedError.type)) {
+            actualTypes.push(expectedError.type)
+          }
+        }
         expect(actualTypes.length).toBeGreaterThan(0)
       })
       continue

@@ -6,6 +6,7 @@ import type { Root as HastRoot } from 'hast'
 import { formatNodeUrl } from '@weave-md/core'
 import type { NodeRef, Section, DisplayType } from '@weave-md/core'
 import katex from 'katex'
+import { parseMdast } from '@weave-md/parse'
 
 export interface ToHtmlOptions {
   /** Render math using KaTeX (default: true) */
@@ -222,6 +223,52 @@ function transformWeaveNodesToHtml(
     parent.children[index] = { type: 'html', value: html } as any
     return SKIP
   })
+  
+  // Transform sub (inline substitution) to HTML
+  visit(tree, 'sub', (node: any, index, parent) => {
+    if (index === undefined || !parent) return
+    
+    const rawInitial = node.data?.rawInitial ?? ''
+    const rawReplacement = node.data?.rawReplacement ?? ''
+    
+    // Parse and render both initial and replacement content to support :math
+    const initialHtml = renderInlineContent(rawInitial, options)
+    const replacementHtml = renderInlineContent(rawReplacement, options)
+    // Base64 encode to avoid quote escaping issues with nested content
+    const encodedReplacement = Buffer.from(replacementHtml).toString('base64')
+    
+    // Detect redacted text (black block characters)
+    const isRedacted = /^[█▓▒░■□▪▫]+$/.test(rawInitial.trim())
+    const className = isRedacted ? 'weave-sub weave-sub-redacted' : 'weave-sub'
+    
+    const html = `<span class="${className}" data-replacement-b64="${encodedReplacement}">${initialHtml}</span>`
+    
+    parent.children[index] = { type: 'html', value: html } as any
+    return SKIP
+  })
+}
+
+/**
+ * Parse and render inline content (for :sub replacement text)
+ */
+function renderInlineContent(content: string, options: { renderMath?: boolean }): string {
+  if (!content) return ''
+  
+  // Parse the content as mdast
+  const tree = parseMdast(content)
+  
+  // Transform any sub/math nodes in the parsed tree
+  transformWeaveNodesToHtml(tree, { renderMath: options.renderMath ?? true, footnotes: [] })
+  
+  // Convert to hast and then to HTML
+  const hast = toHast(tree, { allowDangerousHtml: true })
+  if (!hast) return escapeHtml(content)
+  
+  // Get the inner HTML (skip the wrapping paragraph if present)
+  const html = hastToHtml(hast as HastRoot, { allowDangerousHtml: true })
+  
+  // Strip wrapping <p> tags if present (since this is inline content)
+  return html.replace(/^<p>/, '').replace(/<\/p>\s*$/, '')
 }
 
 /**

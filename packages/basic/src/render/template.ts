@@ -119,6 +119,43 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       border-bottom: 2px solid #0066cc;
     }
 
+    /* Inline substitution */
+    .weave-sub {
+      color: #0066cc;
+      text-decoration: none;
+      border-bottom: 1px solid #0066cc;
+      cursor: pointer;
+    }
+
+    .weave-sub:hover {
+      background: #f0f7ff;
+    }
+
+    .weave-sub.expanded {
+      color: inherit;
+      border-bottom: none;
+      cursor: default;
+      background: none;
+    }
+
+    /* Nested subs inside expanded subs should still be styled as links */
+    .weave-sub.expanded .weave-sub:not(.expanded) {
+      color: #0066cc;
+      border-bottom: 1px solid #0066cc;
+      cursor: pointer;
+    }
+
+    /* Redacted style - black blocks that are still clickable */
+    .weave-sub-redacted:not(.expanded) {
+      color: inherit;
+      border-bottom: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    .weave-sub-redacted:not(.expanded):hover {
+      opacity: 0.7;
+    }
 
     .weave-inline-content {
       display: block;
@@ -660,6 +697,26 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       const isHidden = content.style.display === 'none';
       content.style.display = isHidden ? 'block' : 'none';
       trigger.classList.toggle('expanded', isHidden);
+    });
+
+    // Inline substitution click handling
+    document.addEventListener('click', (e) => {
+      const sub = e.target.closest('.weave-sub');
+      if (!sub || sub.classList.contains('expanded')) return;
+
+      e.preventDefault();
+      const encodedReplacement = sub.dataset.replacementB64;
+      if (encodedReplacement) {
+        // Decode base64 with proper UTF-8 handling
+        const binary = atob(encodedReplacement);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        const replacement = new TextDecoder().decode(bytes);
+        sub.innerHTML = replacement;
+        sub.classList.add('expanded');
+      }
     });
 
     // Footnote backlink tracking - remember which reference was clicked

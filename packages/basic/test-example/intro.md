@@ -88,6 +88,14 @@ Visit https://example.com or email test@example.com automatically.
 
 The quadratic formula is :math[x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}].
 
+### Inline Substitution
+
+Einstein's theory can be :sub[summarized simply]{expressed as the famous equation :math[E = mc^2], showing mass-energy equivalence}.
+
+To find the derivative of :math[x^3], apply the :sub[power rule]{rule :math[\frac{d}{dx}x^n = nx^{n-1}], which gives :sub[:math[3x^2]]{:math[3 \cdot x^{3-1} = 3x^2] since :math[n=3]}}.
+
+The witness identified :sub[████████]{John Smith} as the suspect, who was last seen at :sub[██████]{42 Oak St}.
+
 ### Image
 
 ```image
