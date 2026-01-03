@@ -10,6 +10,8 @@ import { gfmAutolinkLiteral } from 'micromark-extension-gfm-autolink-literal'
 import { gfmAutolinkLiteralFromMarkdown, gfmAutolinkLiteralToMarkdown } from 'mdast-util-gfm-autolink-literal'
 import { mathInline } from 'micromark-extension-math-inline'
 import { mathInlineFromMarkdown, mathInlineToMarkdown } from 'mdast-util-math-inline'
+import { sub } from 'micromark-extension-substitute'
+import { subFromMarkdown, subToMarkdown } from 'mdast-util-substitute'
 import type { Root } from 'mdast'
 import type { Extension as MicromarkExtension } from 'micromark-util-types'
 import type { Extension as MdastExtension } from 'mdast-util-from-markdown'
@@ -20,7 +22,8 @@ const defaultMicromarkExtensions = [
   gfmTable(),
   gfmStrikethrough(),
   gfmAutolinkLiteral(),
-  mathInline()
+  mathInline(),
+  sub()
 ]
 
 const defaultMdastExtensions = [
@@ -28,7 +31,8 @@ const defaultMdastExtensions = [
   gfmTableFromMarkdown(),
   gfmStrikethroughFromMarkdown(),
   gfmAutolinkLiteralFromMarkdown(),
-  mathInlineFromMarkdown()
+  mathInlineFromMarkdown(),
+  subFromMarkdown()
 ]
 
 export function parseMdast(markdown: string, opts?: {
@@ -51,7 +55,8 @@ const defaultToMarkdownExtensions = [
   gfmTableToMarkdown(),
   gfmStrikethroughToMarkdown(),
   gfmAutolinkLiteralToMarkdown(),
-  mathInlineToMarkdown()
+  mathInlineToMarkdown(),
+  subToMarkdown()
 ]
 
 export function stringifyMdast(tree: Root, opts?: {

@@ -51,6 +51,16 @@ export interface PreBlock {
   content: string;
 }
 
+export interface Sub {
+  type: 'sub';
+  children: unknown[];  // PhrasingContent[] - empty array from mdast-util-substitute
+  data: {
+    replacement: unknown[];  // PhrasingContent[] - empty array from mdast-util-substitute
+    rawInitial: string;
+    rawReplacement: string;
+  };
+}
+
 export type ExtendedBlock = 
   | ImageBlock
   | GalleryBlock 
@@ -60,3 +70,6 @@ export type ExtendedBlock =
   | VoiceoverBlock 
   | MathBlock 
   | PreBlock;
+
+export type InlineExtension =
+  | Sub;

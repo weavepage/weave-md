@@ -175,6 +175,39 @@
       },
       "required": ["type", "content"]
     },
+    "Sub": {
+      "type": "object",
+      "description": "Inline substitution using :sub[INITIAL]{REPLACEMENT} syntax",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "sub"
+        },
+        "children": {
+          "description": "Initial content as mdast phrasing nodes (empty array from mdast-util-substitute)",
+          "type": "array"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "replacement": {
+              "description": "Replacement content as mdast phrasing nodes (empty array from mdast-util-substitute)",
+              "type": "array"
+            },
+            "rawInitial": {
+              "description": "Raw initial text",
+              "type": "string"
+            },
+            "rawReplacement": {
+              "description": "Raw replacement text",
+              "type": "string"
+            }
+          },
+          "required": ["replacement", "rawInitial", "rawReplacement"]
+        }
+      },
+      "required": ["type", "children", "data"]
+    },
     "PreBlock": {
       "type": "object",
       "properties": {
@@ -323,7 +356,8 @@
       "oneOf": [
         { "$ref": "#/definitions/Strikethrough" },
         { "$ref": "#/definitions/AutolinkLiteral" },
-        { "$ref": "#/definitions/InlineMath" }
+        { "$ref": "#/definitions/InlineMath" },
+        { "$ref": "#/definitions/Sub" }
       ]
     }
   }

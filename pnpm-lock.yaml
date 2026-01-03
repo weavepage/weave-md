@@ -99,6 +99,9 @@ importers:
       mdast-util-math-inline:
         specifier: ^1.0.0
         version: 1.0.0
+      mdast-util-substitute:
+        specifier: ^1.0.0
+        version: 1.0.0
       mdast-util-to-markdown:
         specifier: ^2.1.2
         version: 2.1.2
@@ -115,6 +118,9 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       micromark-extension-math-inline:
+        specifier: ^1.0.0
+        version: 1.0.0
+      micromark-extension-substitute:
         specifier: ^1.0.0
         version: 1.0.0
       strip-bom:
@@ -898,6 +904,9 @@ packages:
   mdast-util-phrasing@4.1.0:
     resolution: {integrity: sha512-TqICwyvJJpBwvGAMZjj4J2n0X8QWp21b9l0o7eXyVJ25YNWYbJDVIyD1bZXE6WtV6RmKJVYmQAKWa0zWOABz2w==}
 
+  mdast-util-substitute@1.0.0:
+    resolution: {integrity: sha512-sT1XwEbRrELWYc1AP7jFuSeW5M+g2vxMN57spFrmSutpoaEfu0X7R+Ni5u85UZmoOBnj2iAijZTwA0pupyRTaw==}
+
   mdast-util-to-hast@13.2.1:
     resolution: {integrity: sha512-cctsq2wp5vTsLIcaymblUriiTcZd0CwWtCbLvrOzYCDZoWyMNV8sZ7krj09FSnsiJi3WVsHLM4k6Dq/yaPyCXA==}
 
@@ -927,6 +936,9 @@ packages:
 
   micromark-extension-math-inline@1.0.0:
     resolution: {integrity: sha512-c5yqjTEOy81vqQ43sAkKrvPNJIrSewseljCS1D1vccgP71UdTyD62K3ImYvfMCQqn6nefLvfRhOYnzl4LNC3rg==}
+
+  micromark-extension-substitute@1.0.0:
+    resolution: {integrity: sha512-XHbextL1LmJ8pLOJw9dmEIiIq0LOBQmxoYcPOs5vPuTDBp9zEUiDdVuaasqEDTlgYnbS5jqfU2okD04ASOlGCA==}
 
   micromark-factory-destination@2.0.1:
     resolution: {integrity: sha512-Xe6rDdJlkmbFRExpTOmRj9N3MaWmbAgdpSrBQvCFqhezUn4AHqJHbaEnfbVYYiexVSs//tqOdY/DxhjdCiJnIA==}
@@ -1948,6 +1960,14 @@ snapshots:
       '@types/mdast': 4.0.4
       unist-util-is: 6.0.1
 
+  mdast-util-substitute@1.0.0:
+    dependencies:
+      mdast-util-from-markdown: 2.0.2
+      mdast-util-to-markdown: 2.1.2
+      micromark-extension-substitute: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+
   mdast-util-to-hast@13.2.1:
     dependencies:
       '@types/hast': 3.0.4
@@ -2029,6 +2049,11 @@ snapshots:
       micromark-util-types: 2.0.2
 
   micromark-extension-math-inline@1.0.0:
+    dependencies:
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+
+  micromark-extension-substitute@1.0.0:
     dependencies:
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.2
