@@ -8,10 +8,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@weave-md/basic": "^0.1.0-alpha.0",
-    "@weave-md/core": "^0.1.0-alpha.0",
-    "@weave-md/parse": "^0.1.0-alpha.0",
-    "@weave-md/validate": "^0.1.0-alpha.0"
+    "@weave-md/basic": "workspace:*",
+    "@weave-md/core": "workspace:*",
+    "@weave-md/parse": "workspace:*",
+    "@weave-md/validate": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

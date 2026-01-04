@@ -1,6 +1,6 @@
 {
   "name": "@weave-md/core",
-  "version": "0.2.0-alpha.0",
+  "version": "0.3.0-alpha.0",
   "description": "Weave Markdown language contract - spec, schemas, types, and pure helpers",
   "type": "module",
   "main": "dist/index.js",

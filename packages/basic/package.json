@@ -1,6 +1,6 @@
 {
   "name": "@weave-md/basic",
-  "version": "0.2.0-alpha.0",
+  "version": "0.3.0-alpha.0",
   "description": "Reference implementation of Weave Markdown - CLI, renderer, and exporter",
   "type": "module",
   "main": "dist/index.js",
