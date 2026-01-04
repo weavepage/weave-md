@@ -109,7 +109,7 @@ title: Test Section
 ---
 
 \`\`\`image
-src: /images/photo.jpg
+file: /images/photo.jpg
 alt: A photo
 \`\`\``
 

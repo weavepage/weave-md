@@ -53,6 +53,14 @@ Block:
 ```
 ````
 
+### Inline Substitution
+
+Use `:sub[INITIAL]{REPLACEMENT}` to define inline content that is replaced on activation.
+
+```markdown
+The :sub[TL;DR]{full explanation} summarizes the point.
+```
+
 ### Preformatted Text
 
 ````markdown

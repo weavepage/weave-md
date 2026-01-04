@@ -182,11 +182,11 @@ function validateMediaConfig(mediaType: string, config: Record<string, unknown>)
   const diagnostics: Diagnostic[] = []
   
   if (mediaType === 'image') {
-    if (typeof config.src !== 'string' || !config.src) {
+    if (typeof config.file !== 'string' || !config.file) {
       diagnostics.push({
         severity: 'error',
         code: 'WEAVE_MEDIA_CONFIG_INVALID',
-        message: 'Image block requires "src" field'
+        message: 'Image block requires "file" field'
       })
     }
     if (!config.alt) {
@@ -205,11 +205,11 @@ function validateMediaConfig(mediaType: string, config: Record<string, unknown>)
       })
     }
   } else if (mediaType === 'audio' || mediaType === 'video') {
-    if (typeof config.src !== 'string' || !config.src) {
+    if (typeof config.file !== 'string' || !config.file) {
       diagnostics.push({
         severity: 'error',
         code: 'WEAVE_MEDIA_CONFIG_INVALID',
-        message: `${mediaType} block requires "src" field`
+        message: `${mediaType} block requires "file" field`
       })
     }
   } else if (mediaType === 'embed') {
@@ -221,11 +221,11 @@ function validateMediaConfig(mediaType: string, config: Record<string, unknown>)
       })
     }
   } else if (mediaType === 'voiceover') {
-    if (typeof config.src !== 'string' || !config.src) {
+    if (typeof config.file !== 'string' || !config.file) {
       diagnostics.push({
         severity: 'error',
         code: 'WEAVE_MEDIA_CONFIG_INVALID',
-        message: 'Voiceover block requires "src" field'
+        message: 'Voiceover block requires "file" field'
       })
     }
   }

@@ -5,7 +5,7 @@ title: Weave Format Demo
 
 # Weave Format Demo
 
-This document showcases the weave format extensions available in Weave Markdown. When viewed through a Weave-compatible renderer, both the inline math and the fenced code blocks below will be transformed into rich content.
+This document showcases the weave format extensions available in Weave Markdown. When viewed through a Weave-compatible renderer, the inline math and substitute and the fenced code blocks below will be transformed into rich content.
 
 ## Math
 
@@ -14,6 +14,13 @@ The equation :math[E = mc^2] is famous.
 ```math
 \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
 ```
+
+## Substitute
+
+To find the derivative of :math[x^3], apply the :sub[power rule]{rule :math[\frac{d}{dx}x^n = nx^{n-1}], which gives :sub[:math[3x^2]]{:math[3 \cdot x^{3-1} = 3x^2] since :math[n=3]}}.
+
+The witness identified :sub[████████]{John Smith} as the suspect, who was last seen at :sub[██████]{42 Oak St}.
+
 
 ## Preformatted Text
 

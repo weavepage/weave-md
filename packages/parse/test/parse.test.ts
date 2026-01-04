@@ -86,13 +86,13 @@ id: test
 ---
 
 \`\`\`image
-caption: No src field
+caption: No file field
 \`\`\`
 `)
     
     const errorDiag = ast.diagnostics?.find(d => d.code === 'WEAVE_MEDIA_CONFIG_INVALID')
     expect(errorDiag).toBeDefined()
-    expect(errorDiag!.message).toContain('src')
+    expect(errorDiag!.message).toContain('file')
   })
 
   it('missing alt on image produces warning diagnostic', () => {
@@ -101,7 +101,7 @@ id: test
 ---
 
 \`\`\`image
-src: /photo.jpg
+file: /photo.jpg
 \`\`\`
 `)
     
@@ -133,7 +133,7 @@ id: test
 ---
 
 \`\`\`image
-src: /photo.jpg
+file: /photo.jpg
 alt: A photo
 \`\`\`
 `)
@@ -141,7 +141,7 @@ alt: A photo
     const mediaBlock = tree.children.find((n: any) => n.type === 'weaveMediaBlock') as any
     expect(mediaBlock?.type).toBe('weaveMediaBlock')
     expect(mediaBlock?.mediaType).toBe('image')
-    expect(mediaBlock?.config?.src).toBe('/photo.jpg')
+    expect(mediaBlock?.config?.file).toBe('/photo.jpg')
   })
 
   it('parses preformatted blocks correctly', () => {
