@@ -83,7 +83,7 @@ E = mc^2
 
 **Note on Syntax Choice**: We use fenced code blocks with `math` language rather than the `$$...$$` delimiters common in LaTeX because `$$` delimiters can be ambiguous in Markdown and don't integrate well with standard Markdown parsers. Fenced code blocks provide clear boundaries and better tooling support.
 
-**Rendering**: KaTeX or MathJax-based renderers
+**Rendering**: KaTeX or MathJax-based renderers recommended
 
 ### Inline Math
 
