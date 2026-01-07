@@ -8,6 +8,8 @@ import { gfmStrikethrough } from 'micromark-extension-gfm-strikethrough'
 import { gfmStrikethroughFromMarkdown, gfmStrikethroughToMarkdown } from 'mdast-util-gfm-strikethrough'
 import { gfmAutolinkLiteral } from 'micromark-extension-gfm-autolink-literal'
 import { gfmAutolinkLiteralFromMarkdown, gfmAutolinkLiteralToMarkdown } from 'mdast-util-gfm-autolink-literal'
+import { gfmTaskListItem } from 'micromark-extension-gfm-task-list-item'
+import { gfmTaskListItemFromMarkdown, gfmTaskListItemToMarkdown } from 'mdast-util-gfm-task-list-item'
 import { mathInline } from 'micromark-extension-math-inline'
 import { mathInlineFromMarkdown, mathInlineToMarkdown } from 'mdast-util-math-inline'
 import { sub } from 'micromark-extension-substitute'
@@ -22,6 +24,7 @@ const defaultMicromarkExtensions = [
   gfmTable(),
   gfmStrikethrough(),
   gfmAutolinkLiteral(),
+  gfmTaskListItem(),
   mathInline(),
   sub()
 ]
@@ -31,6 +34,7 @@ const defaultMdastExtensions = [
   gfmTableFromMarkdown(),
   gfmStrikethroughFromMarkdown(),
   gfmAutolinkLiteralFromMarkdown(),
+  gfmTaskListItemFromMarkdown(),
   mathInlineFromMarkdown(),
   subFromMarkdown()
 ]
@@ -55,6 +59,7 @@ const defaultToMarkdownExtensions = [
   gfmTableToMarkdown(),
   gfmStrikethroughToMarkdown(),
   gfmAutolinkLiteralToMarkdown(),
+  gfmTaskListItemToMarkdown(),
   mathInlineToMarkdown(),
   subToMarkdown()
 ]

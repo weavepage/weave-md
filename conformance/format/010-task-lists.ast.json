@@ -1,0 +1,10 @@
+{
+  "sections": [
+    {
+      "id": "task-lists-test",
+      "title": "Task Lists Test",
+      "body": "A simple task list:\n\n- [ ] Unchecked item\n- [x] Checked item\n- [X] Also checked (uppercase)\n\nNested task lists:\n\n- [x] Parent task\n  - [ ] Child unchecked\n  - [x] Child checked\n- [ ] Another parent"
+    }
+  ],
+  "links": []
+}

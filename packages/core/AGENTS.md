@@ -8,7 +8,7 @@ All [CommonMark](https://commonmark.org/) syntax is valid: headings, paragraphs,
 
 ## From GFM
 
-Tables, strikethrough (`~~text~~`), and autolinks are supported.
+Tables, strikethrough (`~~text~~`), autolinks, and task lists are supported.
 
 ## Weave Extensions
 

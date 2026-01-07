@@ -2,7 +2,7 @@
 
 Weave Format is a collection of rich content blocks that extend CommonMark with support for:
 
-- **Text formatting** - Strikethrough, tables, autolink literals, and preformatted blocks
+- **Text formatting** - Strikethrough, tables, autolink literals, task lists, and preformatted blocks
 - **Mathematics** - Block and inline LaTeX rendering
 - **Media** - Images, galleries, audio, video, embeds, and voiceover
 
@@ -53,6 +53,20 @@ Visit https://example.com or email user@example.com
 - URLs starting with `http://` or `https://` are automatically linked
 - Email addresses in the format `user@domain.com` are automatically linked
 - No explicit link syntax required
+
+### Task Lists
+
+Create interactive checklists using bracket syntax in list items:
+
+```markdown
+- [ ] Unchecked item
+- [x] Checked item
+- [X] Also checked (uppercase works)
+```
+
+**Implementation**: GFM-compatible / markdown-it / remark-gfm
+
+**Behavior**: Renders as semantic checkboxes. Interactivity is implementation-defined.
 
 ### Preformatted Text
 
