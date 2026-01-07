@@ -472,6 +472,25 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       background: #fafafa;
     }
 
+    /* Task lists */
+    ul:has(input[type="checkbox"]) {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul:has(input[type="checkbox"]) ul {
+      list-style: none;
+      padding-left: 1.5em;
+    }
+
+    li:has(> input[type="checkbox"]) {
+      margin-bottom: 0.25em;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 0.5em;
+    }
+
     /* Code blocks */
     pre {
       background: #f5f5f5;

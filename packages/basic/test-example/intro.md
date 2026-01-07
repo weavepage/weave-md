@@ -70,6 +70,14 @@ This is ~~struck through~~ text.
 
 Visit https://example.com or email test@example.com automatically.
 
+### Task List
+
+- [ ] Unchecked item
+- [x] Checked item
+- [x] Nested tasks
+  - [ ] Sub-item unchecked
+  - [x] Sub-item checked
+
 ### Preformatted
 
 ```pre
