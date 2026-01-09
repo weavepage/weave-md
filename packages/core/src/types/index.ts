@@ -3,6 +3,7 @@ export interface Section {
   title?: string;
   peek?: string;
   body: string;
+  extra?: Record<string, unknown>;
 }
 
 export type DisplayType =

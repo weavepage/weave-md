@@ -168,11 +168,15 @@ export function extractFrontmatter(tree: Root, diagnostics: Diagnostic[]): {
   
   tree.children.splice(0, 1)
   
+  const { id, title, peek, ...rest } = parsed
+  const extra = Object.keys(rest).length > 0 ? rest : undefined
+  
   return {
     frontmatter: {
-      id: parsed.id,
-      title: parsed.title,
-      peek: parsed.peek
+      id,
+      title,
+      peek,
+      extra
     },
     node: frontmatterNode
   }

@@ -40,13 +40,14 @@ Section body content here.
 - **Required**: No
 - **Description**: Preview text shown in peek views
 
+**Unknown Fields**: Implementations MUST preserve unknown YAML fields in frontmatter. This allows renderer-specific extensions and custom configuration without breaking conformance. Implementations MAY emit info-level messages for unknown fields.
+
 ## Validation Rules
 
 Implementations MUST:
 
 1. **Error on missing `id`**: A section without an `id` is invalid
 2. **Error on duplicate `id`**: Multiple sections with the same `id` is invalid
-3. **Info on unknown fields**: Unknown frontmatter fields should emit info-level messages
 
 ## Examples
 

@@ -12,7 +12,9 @@ export function stringifyWeaveDocument(
   doc: WeaveDocument,
   options?: { extensions?: WeaveExtension[] }
 ): string {
-  let output = '---\n' + stringifyYaml(doc.frontmatter) + '---\n\n'
+  const { extra, ...knownFields } = doc.frontmatter
+  const frontmatterToSerialize = extra ? { ...knownFields, ...extra } : knownFields
+  let output = '---\n' + stringifyYaml(frontmatterToSerialize) + '---\n\n'
   
   const userToMarkdownExtensions = collectToMarkdownExtensions(options?.extensions)
   

@@ -214,4 +214,47 @@ E = mc^2
     expect(output).toContain('```math')
     expect(output).toContain('E = mc^2')
   })
+
+  it('stringifyWeaveDocument preserves unknown frontmatter fields', () => {
+    const original = `---
+id: test
+title: Test Title
+customField: custom value
+anotherField: 123
+nestedField:
+  key: value
+---
+
+Content here.
+`
+    const { tree, frontmatter } = parseToMdast(original)
+    const output = stringifyWeaveDocument({ tree, frontmatter })
+    
+    expect(output).toContain('id: test')
+    expect(output).toContain('title: Test Title')
+    expect(output).toContain('customField: custom value')
+    expect(output).toContain('anotherField: 123')
+    expect(output).toContain('nestedField:')
+    expect(output).toContain('key: value')
+  })
+
+  it('unknown frontmatter fields survive full round-trip', () => {
+    const original = `---
+id: roundtrip-unknown
+customMeta: preserved
+tags:
+  - one
+  - two
+---
+
+Some content.
+`
+    const { tree, frontmatter } = parseToMdast(original)
+    const output = stringifyWeaveDocument({ tree, frontmatter })
+    const { frontmatter: reparsed } = parseToMdast(output)
+    
+    expect(reparsed.id).toBe('roundtrip-unknown')
+    expect(reparsed.extra!['customMeta']).toBe('preserved')
+    expect(reparsed.extra!['tags']).toEqual(['one', 'two'])
+  })
 })
