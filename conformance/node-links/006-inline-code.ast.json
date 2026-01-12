@@ -1,0 +1,16 @@
+{
+  "sections": [
+    {
+      "id": "inline-code-test",
+      "title": "Inline Code Should Not Be Parsed",
+      "body": "Node links inside inline code should not be extracted.\n\n## Inline code examples\nDocumented syntax: `[Link](node:example)` should not be parsed.\nReference in backticks: `node:foo` is just text.\nMixed: Here is `[text](node:bar?display=inline)` as documentation.\n\n## Real link for comparison\nThis is a real link: [Real](node:target)\n\n## Code at end of line\nDocumentation ends with `[](node:anchor-only)`"
+    }
+  ],
+  "links": [
+    {
+      "ref": { "id": "target" },
+      "text": "Real",
+      "sourceId": "inline-code-test"
+    }
+  ]
+}

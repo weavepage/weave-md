@@ -32,6 +32,15 @@ function extractLinksFromLine(
   let i = 0;
   
   while (i < line.length) {
+    // Skip inline code spans
+    if (line[i] === '`' && !isEscaped(line, i)) {
+      const codeEnd = line.indexOf('`', i + 1);
+      if (codeEnd !== -1) {
+        i = codeEnd + 1;
+        continue;
+      }
+    }
+
     if (line[i] === '[' && !isEscaped(line, i)) {
       const textEnd = findClosingBracket(line, i + 1);
       
