@@ -67,16 +67,18 @@ export function exportToStaticHtml(
   const referencedNodeIds = new Set<string>()
   const overlayNodeIds = new Set<string>()
   const inlineNodeIds = new Set<string>()
+  const stretchNodeIds = new Set<string>()
   const footnoteNodeIds = new Set<string>()
   
   const findNodeRefs = (node: any) => {
     if (node.type === 'weaveNodeLink') {
       const display = node.display || 'footnote'
-      if (display === 'inline' || display === 'overlay' || display === 'footnote') {
+      if (display === 'inline' || display === 'overlay' || display === 'footnote' || display === 'stretch') {
         referencedNodeIds.add(node.targetId)
       }
       if (display === 'overlay') overlayNodeIds.add(node.targetId)
       if (display === 'inline') inlineNodeIds.add(node.targetId)
+      if (display === 'stretch') stretchNodeIds.add(node.targetId)
       if (display === 'footnote') footnoteNodeIds.add(node.targetId)
     }
     if (node.children) {
@@ -157,6 +159,15 @@ export function exportToStaticHtml(
   const iconInformationCircle = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="weave-icon"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>`
 
   const mainNodeLinksHandler = (ref: any, text: string) => {
+    // Handle stretch display mode (Nutshell-style)
+    if (ref.display === 'stretch') {
+      const targetSection = sectionsMap[ref.id]
+      if (targetSection) {
+        const displayText = text && text.trim() !== '' ? escapeHtml(text) : escapeHtml(ref.id)
+        return `<span class="weave-stretch-trigger" data-stretch-id="${escapeHtml(ref.id)}">${displayText}</span>`
+      }
+    }
+    
     // Handle inline display mode
     if (ref.display === 'inline') {
       const targetSection = sectionsMap[ref.id]
@@ -210,6 +221,27 @@ export function exportToStaticHtml(
     return escapeHtml(text || ref.id)
   }
   
+  // nodeLinksHandler for stretch content (preserves stretch triggers, converts others to overlay)
+  const stretchNodeLinksHandler = (ref: any, text: string) => {
+    // Preserve stretch display mode for nested stretches
+    if (ref.display === 'stretch') {
+      const targetSection = sectionsMap[ref.id]
+      if (targetSection) {
+        const displayText = text && text.trim() !== '' ? escapeHtml(text) : escapeHtml(ref.id)
+        return `<span class="weave-stretch-trigger" data-stretch-id="${escapeHtml(ref.id)}">${displayText}</span>`
+      }
+    }
+    // Convert other display modes to overlay
+    const targetSection = sectionsMap[ref.id]
+    if (!targetSection) {
+      return `<span class="weave-unsupported">${escapeHtml(text || ref.id)}</span>`
+    }
+    if (!text || text.trim() === '') {
+      return `<span class="weave-overlay-anchor" data-display="overlay" data-node-id="${escapeHtml(ref.id)}" title="View ${escapeHtml(ref.id)}">${iconInformationCircle}</span>`
+    }
+    return `<span class="weave-node-link" data-display="overlay" data-node-id="${escapeHtml(ref.id)}">${escapeHtml(text)}</span>`
+  }
+  
   // Render main sections first (to establish footnote order)
   const renderedSections: string[] = []
   
@@ -240,15 +272,21 @@ export function exportToStaticHtml(
     </section>`)
   }
   
-  // Build sectionsData for inline/overlay rendering
+  // Build sectionsData for inline/overlay/stretch rendering
+  // - Stretch content: preserves nested stretch triggers
   // - Footnote/inline content: allows overlays only
   // - Overlay content: no nesting allowed
   const sectionsData: Record<string, { title?: string; html: string }> = {}
   for (const section of filteredSections) {
     const tree = trees instanceof Map ? trees.get(section.id) : trees[section.id]
     if (tree) {
-      // Use noNestingHandler for sections used as overlays
-      const handler = overlayNodeIds.has(section.id) ? noNestingHandler : nestedNodeLinksHandler
+      // Choose handler based on how section is used
+      let handler = nestedNodeLinksHandler
+      if (overlayNodeIds.has(section.id)) {
+        handler = noNestingHandler
+      } else if (stretchNodeIds.has(section.id)) {
+        handler = stretchNodeLinksHandler
+      }
       const sectionHtml = toHtml(tree, {
         renderMath: true,
         sections: sectionsMap,

@@ -174,6 +174,117 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       margin-bottom: 0;
     }
 
+    /* Stretch/Nutshell-style expandable content */
+    .weave-stretch-trigger {
+      color: #2b67ad;
+      text-decoration: none;
+      border-bottom: 2px dotted #2b67ad;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .weave-stretch-trigger:hover {
+      background: rgba(43, 103, 173, 0.1);
+    }
+
+    .weave-stretch-trigger.expanded {
+      border-bottom-style: solid;
+    }
+
+    .weave-stretch-bubble {
+      display: block;
+      position: relative;
+      margin-top: 20px;
+      transition: opacity 0.3s ease-out, margin 0.3s ease-out;
+      opacity: 0;
+      margin-bottom: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .weave-stretch-bubble.open {
+      max-height: none;
+      overflow: visible;
+      opacity: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .weave-stretch-content {
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 1rem;
+      padding: 1rem 0.8rem;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Arrow pointing up to trigger (Nutshell-style) */
+    .weave-stretch-arrow {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid #ccc;
+      position: absolute;
+      top: -20px;
+      pointer-events: none;
+    }
+
+    .weave-stretch-arrow::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid #fff;
+      position: absolute;
+      top: 2px;
+      left: -20px;
+      pointer-events: none;
+    }
+
+    .weave-stretch-content p:first-child {
+      margin-top: 0;
+    }
+
+    .weave-stretch-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .weave-stretch-content ul,
+    .weave-stretch-content ol {
+      padding-left: 1.5rem;
+      margin: 0.5rem 0;
+    }
+
+    /* Nested stretch bubbles - slightly different style */
+    .weave-stretch-content .weave-stretch-content {
+      background: #fafafa;
+      border-color: #ddd;
+    }
+
+    .weave-stretch-content .weave-stretch-arrow {
+      border-bottom-color: #ddd;
+    }
+
+    .weave-stretch-content .weave-stretch-arrow::after {
+      border-bottom-color: #fafafa;
+    }
+
+    /* Level 3+ nesting */
+    .weave-stretch-content .weave-stretch-content .weave-stretch-content {
+      background: #f5f5f5;
+      border-color: #e0e0e0;
+    }
+
+    .weave-stretch-content .weave-stretch-content .weave-stretch-arrow {
+      border-bottom-color: #e0e0e0;
+    }
+
+    .weave-stretch-content .weave-stretch-content .weave-stretch-arrow::after {
+      border-bottom-color: #f5f5f5;
+    }
+
     /* Footnote references */
     .weave-footnote-ref {
       font-size: 0.75em;
@@ -735,6 +846,59 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
         const replacement = new TextDecoder().decode(bytes);
         sub.innerHTML = replacement;
         sub.classList.add('expanded');
+      }
+    });
+
+    // Stretch/Nutshell-style expand/collapse handling
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.weave-stretch-trigger');
+      if (!trigger) return;
+
+      e.preventDefault();
+      
+      const stretchId = trigger.dataset.stretchId;
+      
+      // Find or create bubble
+      let bubble = trigger._bubble;
+      
+      if (!bubble) {
+        const section = sections[stretchId];
+        if (!section) return;
+        
+        bubble = document.createElement('div');
+        bubble.className = 'weave-stretch-bubble';
+        bubble.dataset.stretchId = stretchId;
+        bubble.innerHTML = '<div class="weave-stretch-content"><div class="weave-stretch-arrow"></div>' + section.html + '</div>';
+        
+        // Insert bubble after the parent paragraph
+        const paragraph = trigger.closest('p, li, td, div.weave-stretch-content');
+        if (paragraph && paragraph.parentNode) {
+          paragraph.parentNode.insertBefore(bubble, paragraph.nextSibling);
+        } else {
+          trigger.parentNode.insertBefore(bubble, trigger.nextSibling);
+        }
+        
+        // Position arrow to point at trigger
+        const arrow = bubble.querySelector('.weave-stretch-arrow');
+        const triggerRect = trigger.getBoundingClientRect();
+        const bubbleRect = bubble.getBoundingClientRect();
+        const arrowLeft = triggerRect.left - bubbleRect.left + (triggerRect.width / 2) - 20; // -20 to center the arrow
+        arrow.style.left = arrowLeft + 'px';
+        
+        trigger._bubble = bubble;
+        
+        // Force reflow for animation
+        bubble.offsetHeight;
+      }
+      
+      // Toggle open/close
+      const isOpen = bubble.classList.contains('open');
+      if (isOpen) {
+        bubble.classList.remove('open');
+        trigger.classList.remove('expanded');
+      } else {
+        bubble.classList.add('open');
+        trigger.classList.add('expanded');
       }
     });
 

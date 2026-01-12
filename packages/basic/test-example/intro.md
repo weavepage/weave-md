@@ -15,6 +15,8 @@ This tests [inline display](node:inline-basic?display=inline) with text.
 
 This tests [overlay display](node:overlay-basic?display=overlay) with text.
 
+This tests [stretch display](node:stretch-basic?display=stretch) with Nutshell-style expand.
+
 ### Anchor-only References
 
 Footnote anchor only: [ ](node:fn-anchor?display=footnote)
@@ -44,6 +46,10 @@ Click to expand [inline with overlay](node:inline-with-overlay?display=inline).
 ### Overlay in Footnote
 
 This has a footnote that contains an overlay.[ ](node:fn-with-overlay?display=footnote)
+
+### Nested Stretch (Nutshell-style)
+
+Click to learn about [recursion](node:stretch-recursion?display=stretch) with multiple nesting levels.
 
 ---
 
