@@ -1,6 +1,6 @@
 {
   "name": "@weave-md/parse",
-  "version": "0.3.0-alpha.0",
+  "version": "0.3.1-alpha.0",
   "description": "AST generation for Weave Markdown - parse markdown to WeaveAst",
   "type": "module",
   "main": "dist/index.js",
@@ -32,7 +32,7 @@
     "directory": "packages/parse"
   },
   "peerDependencies": {
-    "@weave-md/core": "workspace:*"
+    "@weave-md/core": "workspace:^"
   },
   "dependencies": {
     "mdast-util-from-markdown": "^2.0.2",
@@ -60,7 +60,7 @@
   "devDependencies": {
     "@types/mdast": "^4.0.4",
     "@types/node": "^20.10.0",
-    "@weave-md/core": "workspace:*",
+    "@weave-md/core": "workspace:^",
     "micromark-util-types": "^2.0.2",
     "typescript": "^5.7.0"
   }
