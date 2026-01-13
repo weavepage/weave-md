@@ -17,9 +17,12 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Iowan Old Style', 'Cambria', 'Palatino Linotype', Palatino, Georgia, serif;
+      font-size: 20px;
+      font-weight: 300;
       line-height: 1.6;
-      color: #333;
+      letter-spacing: 0.01em;
+      color: #363737;
       background: #fff;
       padding: 2rem 1rem;
     }
@@ -34,27 +37,65 @@ export const HTML_TEMPLATE = `<!DOCTYPE html>
       margin-bottom: 3rem;
     }
 
+    h1, h2, h3, h4, h5, h6 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* Reduce top margin when header follows another header */
+    h1 + h2, h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
+      margin-top: 4px;
+    }
+
     h1 {
-      font-size: 2.25rem;
+      font-size: 32px;
       font-weight: 700;
+      margin-bottom: 20px;
     }
 
     h2 {
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      font-size: 1.75rem;
+      margin-top: 32px;
+      margin-bottom: 20px;
+      font-size: 28px;
       font-weight: 600;
     }
 
     h3 {
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-      font-size: 1.25rem;
+      margin-top: 26px;
+      margin-bottom: 16px;
+      font-size: 26px;
       font-weight: 600;
+    }
+    
+    h4 {
+      margin-top: 22px;
+      margin-bottom: 14px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    h5 {
+      margin-top: 18px;
+      margin-bottom: 12px;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    
+    h6 {
+      margin-top: 16px;
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 500;
     }
 
     p {
-      margin-bottom: 1rem;
+      margin-bottom: 16px;
+    }
+
+    blockquote {
+      padding-left: 20px;
+      border-left: 3px solid #0066cc;
+      margin-top: 20px;
     }
 
     /* Node links */
