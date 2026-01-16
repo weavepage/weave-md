@@ -1,14 +1,27 @@
 # Weave Format
 
-Weave Format is a collection of rich content blocks that extend CommonMark with support for:
+Weave Format extends CommonMark with rich content capabilities for writing.
 
-- **Text formatting** - Strikethrough, tables, autolink literals, task lists, and preformatted blocks
-- **Mathematics** - Block and inline LaTeX rendering
-- **Media** - Images, galleries, audio, video, embeds, and voiceover
+## Extension Categories
 
-All weave format blocks use fenced code block syntax with YAML frontmatter for configuration. This provides clean integration with standard Markdown parsers and tooling while enabling rich, structured content.
+Extensions are organized into three categories based on their syntax:
 
-## Text Formatting
+### 1. GFM Features
+Standard GitHub Flavored Markdown extensions for enhanced text formatting:
+- Strikethrough, tables, autolink literals, task lists
+
+### 2. Directives
+Inline constructs using `:name[...]` syntax:
+- `:math[...]` — Inline LaTeX expressions
+- `:sub[...]{...}` — Expandable inline substitution
+
+### 3. Fenced Blocks
+Block-level constructs using fenced code block syntax with optional YAML configuration:
+- `math` — Block LaTeX expressions
+- `pre` — Preformatted text with preserved whitespace
+- Media blocks: `image`, `gallery`, `audio`, `video`, `embed`, `voiceover`
+
+## GFM Features
 
 ### Strikethrough
 
@@ -68,36 +81,7 @@ Create interactive checklists using bracket syntax in list items:
 
 **Behavior**: Renders as semantic checkboxes. Interactivity is implementation-defined.
 
-### Preformatted Text
-
-Preserve exact spacing and line breaks using the `pre` language:
-
-````markdown
-```pre
-Roses are red,
-  Violets are blue,
-    Spacing matters,
-      In poetry too.
-```
-````
-
-**Behavior**: Whitespace and line breaks are preserved exactly as written.
-
-## Mathematics
-
-### Block Math
-
-Use fenced code blocks with `math` language:
-
-````markdown
-```math
-E = mc^2
-```
-````
-
-**Note on Syntax Choice**: We use fenced code blocks with `math` language rather than the `$$...$$` delimiters common in LaTeX because `$$` delimiters can be ambiguous in Markdown and don't integrate well with standard Markdown parsers. Fenced code blocks provide clear boundaries and better tooling support.
-
-**Rendering**: KaTeX or MathJax-based renderers recommended
+## Directives
 
 ### Inline Math
 
@@ -124,9 +108,42 @@ The :sub[TL;DR]{full explanation that appears after activation} summarizes the p
 
 **Note (Non-Normative)**: Implementations MAY allow collapsing a revealed `:sub` back to its initial state as a UI convenience.
 
-## Media Elements
+## Fenced Blocks (Block-Level Constructs)
 
-All media elements use YAML structure inside fenced code blocks to specify their properties. Required fields must be present for valid parsing, while optional fields provide additional configuration.
+Fenced blocks use standard Markdown fenced code block syntax with language identifiers and optional YAML frontmatter for configuration.
+
+### Block Math
+
+Use fenced code blocks with `math` language:
+
+````markdown
+```math
+E = mc^2
+```
+````
+
+**Note on Syntax Choice**: We use fenced code blocks with `math` language rather than the `$$...$$` delimiters common in LaTeX because `$$` delimiters can be ambiguous in Markdown and don't integrate well with standard Markdown parsers. Fenced code blocks provide clear boundaries and better tooling support.
+
+**Rendering**: KaTeX or MathJax-based renderers recommended
+
+### Preformatted Text
+
+Preserve exact spacing and line breaks using the `pre` language:
+
+````markdown
+```pre
+Roses are red,
+  Violets are blue,
+    Spacing matters,
+      In poetry too.
+```
+````
+
+**Behavior**: Whitespace and line breaks are preserved exactly as written.
+
+---
+
+**Media blocks** use YAML structure inside fenced code blocks to specify their properties. Required fields must be present for valid parsing, while optional fields provide additional configuration.
 
 **Unknown Fields**: Implementations MUST preserve unknown YAML fields in media blocks. This allows renderer-specific extensions and custom configuration without breaking conformance. Implementations MAY emit info-level messages for unknown fields.
 
