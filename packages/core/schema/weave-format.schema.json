@@ -117,18 +117,6 @@
       "required": ["url"],
       "additionalProperties": true
     },
-    "VoiceoverBlock": {
-      "type": "object",
-      "description": "YAML content for ```voiceover blocks",
-      "properties": {
-        "file": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": ["file"],
-      "additionalProperties": true
-    },
     "MathBlock": {
       "type": "object",
       "description": "Content for ```math blocks (raw LaTeX, no YAML)",
@@ -206,7 +194,6 @@
         { "$ref": "#/definitions/AudioBlock" },
         { "$ref": "#/definitions/VideoBlock" },
         { "$ref": "#/definitions/EmbedBlock" },
-        { "$ref": "#/definitions/VoiceoverBlock" },
         { "$ref": "#/definitions/MathBlock" },
         { "$ref": "#/definitions/PreBlock" }
       ]

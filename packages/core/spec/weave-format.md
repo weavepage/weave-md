@@ -19,7 +19,7 @@ Inline constructs using `:name[...]` syntax:
 Block-level constructs using fenced code block syntax with optional YAML configuration:
 - `math` — Block LaTeX expressions
 - `pre` — Preformatted text with preserved whitespace
-- Media blocks: `image`, `gallery`, `audio`, `video`, `embed`, `voiceover`
+- Media blocks: `image`, `gallery`, `audio`, `video`, `embed`
 
 ## GFM Features
 
@@ -253,18 +253,3 @@ url: https://example.com/widget
 **Behavior**:
 - Creates an iframe or appropriate embed container for the URL
 
-### Voiceover
-
-Embed voiceover audio narration:
-
-````markdown
-```voiceover
-file: https://example.com/voiceover.mp3
-```
-````
-
-**Voiceover Fields**:
-- `file` (required) — Audio file URL or file reference for the voiceover
-
-**Behavior**:
-- Embeds pre-recorded voiceover audio narration

@@ -36,11 +36,6 @@ export interface EmbedBlock {
   url: string;
 }
 
-export interface VoiceoverBlock {
-  type: 'voiceover';
-  file: string;
-}
-
 export interface MathBlock {
   type: 'math';
   value: string;
@@ -72,7 +67,6 @@ export type ExtendedBlock =
   | AudioBlock 
   | VideoBlock 
   | EmbedBlock 
-  | VoiceoverBlock 
   | MathBlock 
   | PreBlock;
 

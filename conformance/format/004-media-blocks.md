@@ -37,9 +37,3 @@ An embed block:
 ```embed
 url: https://example.com/embed
 ```
-
-A voiceover block:
-
-```voiceover
-file: /audio/narration.mp3
-```

@@ -60,7 +60,7 @@ export interface WeaveMathBlock {
 
 export interface WeaveMediaBlock {
   type: 'weaveMediaBlock'
-  mediaType: 'image' | 'gallery' | 'audio' | 'video' | 'embed' | 'voiceover'
+  mediaType: 'image' | 'gallery' | 'audio' | 'video' | 'embed'
   config: Record<string, unknown>
   position?: {
     start: { line: number; column: number; offset?: number }

@@ -48,9 +48,6 @@ export function validateWeaveBlocks(markdown: string, filePath?: string): Diagno
       case 'embed':
         diagnostics.push(...validateEmbedBlock(block, filePath));
         break;
-      case 'voiceover':
-        diagnostics.push(...validateVoiceoverBlock(block, filePath));
-        break;
       case 'math':
         diagnostics.push(...validateMathBlock(block, filePath));
         break;
@@ -386,45 +383,6 @@ function validateEmbedBlock(block: WeaveBlock, filePath?: string): Diagnostic[] 
       filePath,
       position: { line: block.line, character: 1 },
       code: 'invalid-embed-yaml'
-    });
-  }
-  
-  return diagnostics;
-}
-
-function validateVoiceoverBlock(block: WeaveBlock, filePath?: string): Diagnostic[] {
-  const diagnostics: Diagnostic[] = [];
-  
-  try {
-    const data = parse(block.content);
-    
-    if (!data || typeof data !== 'object') {
-      diagnostics.push({
-        severity: 'error',
-        message: 'Voiceover block must contain YAML data',
-        filePath,
-        position: { line: block.line, character: 1 },
-        code: 'invalid-voiceover-block'
-      });
-      return diagnostics;
-    }
-    
-    if (!data.file) {
-      diagnostics.push({
-        severity: 'error',
-        message: 'Voiceover block must have a "file" field',
-        filePath,
-        position: { line: block.line, character: 1 },
-        code: 'missing-voiceover-file'
-      });
-    }
-  } catch (error) {
-    diagnostics.push({
-      severity: 'error',
-      message: `Failed to parse voiceover block YAML: ${error instanceof Error ? error.message : String(error)}`,
-      filePath,
-      position: { line: block.line, character: 1 },
-      code: 'invalid-voiceover-yaml'
     });
   }
   

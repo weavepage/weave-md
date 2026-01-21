@@ -387,11 +387,6 @@ function createMediaHtml(mediaType: string, config: Record<string, unknown>): st
       return `<figure class="weave-media weave-embed"><iframe src="${url}"${width}${height} frameborder="0" allowfullscreen></iframe></figure>`
     }
     
-    case 'voiceover': {
-      const src = getFile()
-      return `<aside class="weave-media weave-voiceover"><audio src="${src}" controls></audio></aside>`
-    }
-    
     default:
       return `<div class="weave-media weave-${esc(mediaType)}">[${esc(mediaType)}]</div>`
   }

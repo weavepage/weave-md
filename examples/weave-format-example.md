@@ -72,9 +72,3 @@ loop: false
 ```embed
 url: https://example.com/widget
 ```
-
-## Voiceover
-
-```voiceover
-file: https://example.com/narration.mp3
-```

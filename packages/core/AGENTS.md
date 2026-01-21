@@ -99,8 +99,4 @@ poster: https://example.com/poster.jpg
 ```embed
 url: https://example.com/widget
 ```
-
-```voiceover
-file: https://example.com/narration.mp3
-```
 ````

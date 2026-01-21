@@ -21,7 +21,7 @@ Tests are organized by feature:
 | `001-valid-document` | Complete weave document with all frontmatter fields |
 | `002-no-title` | Document with only required `id` field (title optional) |
 | `003-math-block` | Math blocks with LaTeX content |
-| `004-media-blocks` | All media block types (image, gallery, audio, video, embed, voiceover) |
+| `004-media-blocks` | All media block types (image, gallery, audio, video, embed) |
 | `005-inline-math` | Inline math syntax `:math[...]` |
 | `006-preformatted` | Preformatted blocks with preserved whitespace |
 

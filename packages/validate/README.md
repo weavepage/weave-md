@@ -14,7 +14,6 @@ Format conformance validator for Weave Markdown - lightweight for editor/CI use.
   - `audio` blocks (requires `file`, validates boolean `autoplay`, `controls`, `loop`)
   - `video` blocks (requires `file`, validates `start` number and boolean options)
   - `embed` blocks (requires `url`)
-  - `voiceover` blocks (requires `file`)
   - `math` blocks (validates non-empty content)
   - `pre` blocks (warns about empty content)
 - **Frontmatter validation** - Validates YAML frontmatter with required `id` field and optional `title`, `peek`

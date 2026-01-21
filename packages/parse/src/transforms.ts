@@ -74,7 +74,7 @@ export function transformNodeLinks(tree: Root): Root {
 }
 
 export function transformWeaveBlocks(tree: Root): Root {
-  const mediaTypes = ['image', 'gallery', 'audio', 'video', 'embed', 'voiceover']
+  const mediaTypes = ['image', 'gallery', 'audio', 'video', 'embed']
   
   visit(tree, 'code', (node: any, index, parent) => {
     if (!node.lang) return
@@ -222,14 +222,6 @@ function validateMediaConfig(mediaType: string, config: Record<string, unknown>)
         severity: 'error',
         code: 'WEAVE_MEDIA_CONFIG_INVALID',
         message: 'Embed block requires "url" field'
-      })
-    }
-  } else if (mediaType === 'voiceover') {
-    if (typeof config.file !== 'string' || !config.file) {
-      diagnostics.push({
-        severity: 'error',
-        code: 'WEAVE_MEDIA_CONFIG_INVALID',
-        message: 'Voiceover block requires "file" field'
       })
     }
   }

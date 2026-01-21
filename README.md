@@ -8,7 +8,7 @@ Weave Markdown extends standard Markdown with:
 
 - **Section frontmatter** — YAML metadata defining section identity
 - **Node links** — `node:` URL scheme for referencing sections
-- **Weave format** — Rich media, math (LaTeX), embeds, and voiceover
+- **Weave format** — Rich media, math (LaTeX), and embeds
 
 ## Repository Layout
 
