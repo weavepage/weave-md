@@ -1,0 +1,79 @@
+/**
+ * @weave-md/weave-link - Minimal CSS for node links
+ * 
+ * Import this file to get default styling for weave links:
+ * import '@weave-md/weave-link/styles.css'
+ * 
+ * Or use the class names as a reference for your own styles.
+ */
+
+.weave-link {
+  /* Base styling - looks like a link but isn't a hyperlink */
+  color: var(--weave-link-color, #0066cc);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  cursor: default;
+  border-radius: 2px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Pending state - section not yet available */
+.weave-link--pending {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Resolved state - section available, interactive */
+.weave-link--resolved {
+  cursor: pointer;
+  text-decoration-style: solid;
+  opacity: 1;
+}
+
+.weave-link--resolved:hover {
+  background-color: var(--weave-link-hover-bg, rgba(0, 102, 204, 0.1));
+}
+
+.weave-link--resolved:focus {
+  outline: 2px solid var(--weave-link-focus-color, #0066cc);
+  outline-offset: 1px;
+}
+
+.weave-link--resolved:active {
+  background-color: var(--weave-link-active-bg, rgba(0, 102, 204, 0.2));
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .weave-link {
+    --weave-link-color: #66b3ff;
+    --weave-link-hover-bg: rgba(102, 179, 255, 0.15);
+    --weave-link-focus-color: #66b3ff;
+    --weave-link-active-bg: rgba(102, 179, 255, 0.25);
+  }
+}
+
+/* Alternative: explicit dark mode class */
+[data-weave-dark] .weave-link,
+.weave-link[data-weave-dark] {
+  --weave-link-color: #66b3ff;
+  --weave-link-hover-bg: rgba(102, 179, 255, 0.15);
+  --weave-link-focus-color: #66b3ff;
+  --weave-link-active-bg: rgba(102, 179, 255, 0.25);
+}
+
+/* Display type indicators (optional visual hints) */
+.weave-link[data-display="overlay"]::after,
+.weave-link[data-display="panel"]::after {
+  content: " ↗";
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+
+.weave-link[data-display="footnote"]::after,
+.weave-link[data-display="sidenote"]::after {
+  content: " *";
+  font-size: 0.75em;
+  opacity: 0.6;
+}
