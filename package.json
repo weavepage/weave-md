@@ -27,6 +27,7 @@
     "@weave-md/basic": "workspace:*",
     "@weave-md/core": "workspace:*",
     "@weave-md/parse": "workspace:*",
+    "@weave-md/stream": "workspace:*",
     "@weave-md/validate": "workspace:*",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",

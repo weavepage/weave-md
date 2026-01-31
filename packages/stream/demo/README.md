@@ -5,7 +5,7 @@ This demo shows how to implement display behaviors for Weave node links in a cha
 ## Running the Demo
 
 ```bash
-cd packages/weave-link
+cd packages/stream
 npm run demo
 ```
 
@@ -65,5 +65,5 @@ const messageFootnotes = useMemo(() => {
 ## Dependencies
 
 ```bash
-npm install @weave-md/weave-link react markdown-it
+npm install @weave-md/stream react markdown-it
 ```

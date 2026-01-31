@@ -1,6 +1,6 @@
-# @weave-md/weave-link
+# @weave-md/stream
 
-Lightweight utilities for rendering Weave node links in chat interfaces.
+Lightweight utilities for parsing and rendering streamed Weave content.
 
 ## Why This Exists
 
@@ -21,7 +21,7 @@ React is an optional peer dependency (only needed for the React component).
 
 ## How It Differs from `@weave-md/parse`
 
-| | @weave-md/weave-link | @weave-md/parse |
+| | @weave-md/stream | @weave-md/parse |
 |---|---|---|
 | **Purpose** | Chat interface embedding | Full Weave tooling |
 | **Input** | Single stream with stacked sections | One file per section |
@@ -34,7 +34,7 @@ This package provides a lightweight alternative that supports stacked sections i
 ## Installation
 
 ```bash
-npm install @weave-md/weave-link
+npm install @weave-md/stream
 ```
 
 ## Usage
@@ -42,7 +42,7 @@ npm install @weave-md/weave-link
 ### Parse Node URLs
 
 ```ts
-import { parseNodeUrl } from '@weave-md/weave-link'
+import { parseNodeUrl } from '@weave-md/stream'
 
 const parsed = parseNodeUrl('node:intro?display=overlay')
 // { id: 'intro', display: 'overlay' }
@@ -54,7 +54,7 @@ parseNodeUrl('https://example.com') // null
 ### Extract Sections from LLM Output
 
 ```ts
-import { splitSections } from '@weave-md/weave-link'
+import { splitSections } from '@weave-md/stream'
 
 const markdown = `
 ---
@@ -91,7 +91,7 @@ The `content` field contains the raw markdown body with frontmatter stripped.
 ### React Integration (ChatGPT)
 
 ```tsx
-import { parseNodeUrl, WeaveLink, createDisplayConfig } from '@weave-md/weave-link/react'
+import { parseNodeUrl, WeaveLink, createDisplayConfig } from '@weave-md/stream/react'
 import ReactMarkdown from 'react-markdown'
 
 // Configure display fallbacks for narrow viewports
@@ -149,7 +149,7 @@ a: ({ href, children }) => {
 
 ```ts
 import MarkdownIt from 'markdown-it'
-import { weaveLinkPlugin } from '@weave-md/weave-link/markdown-it'
+import { weaveLinkPlugin } from '@weave-md/stream/markdown-it'
 
 const md = new MarkdownIt()
 md.use(weaveLinkPlugin)
@@ -212,7 +212,7 @@ interface DisplayConfig {
 **Example: Narrow viewport config**
 
 ```ts
-import { createDisplayConfig } from '@weave-md/weave-link'
+import { createDisplayConfig } from '@weave-md/stream'
 
 const narrowConfig = createDisplayConfig({
   supported: ['inline', 'overlay', 'footnote'],
@@ -288,7 +288,7 @@ import {
   Footnotes, 
   FootnoteRef, 
   InlineExpand 
-} from '@weave-md/weave-link/react'
+} from '@weave-md/stream/react'
 ```
 
 #### `Overlay`
@@ -367,7 +367,7 @@ The host app controls what happens on click (show overlay, scroll to section, et
 For simple use cases, import the static CSS:
 
 ```ts
-import '@weave-md/weave-link/styles.css'
+import '@weave-md/stream/styles.css'
 ```
 
 ### Programmatic Theming (Mermaid-style)
@@ -375,7 +375,7 @@ import '@weave-md/weave-link/styles.css'
 For full control, use the theming API similar to Mermaid's approach:
 
 ```ts
-import { getStyles, injectStyles } from '@weave-md/weave-link/react'
+import { getStyles, injectStyles } from '@weave-md/stream/react'
 
 // Inject styles into document head
 injectStyles({
@@ -436,7 +436,7 @@ injectStyles({
 ### Scoped Styles (Shadow DOM / Isolation)
 
 ```ts
-import { getScopedStyles } from '@weave-md/weave-link/react'
+import { getScopedStyles } from '@weave-md/stream/react'
 
 const css = getScopedStyles('.my-chat-container', {
   themeVariables: { linkColor: '#ff6600' }

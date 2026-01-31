@@ -1,5 +1,5 @@
-// @weave-md/weave-link
-// Utilities for handling Weave node links in chat interfaces
+// @weave-md/stream
+// Utilities for parsing and rendering streamed Weave content
 
 export { parseNodeUrl } from './parseNodeUrl.js'
 export { splitSections } from './splitSections.js'
