@@ -1,6 +1,6 @@
 {
   "name": "tests",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Internal tests for weave-md",
   "type": "module",
   "private": true,

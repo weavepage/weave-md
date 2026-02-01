@@ -2,7 +2,7 @@
 
 **Weave Markdown** - Inline, expandable references for markdown.
 
-This is an umbrella package that re-exports all `@weave-md/*` packages. For most use cases, we recommend installing the individual packages directly from the [@weave-md](https://www.npmjs.com/org/weave-md) organization.
+This is an umbrella package that re-exports `@weave-md/core`, `@weave-md/parse`, `@weave-md/validate`, and `@weave-md/basic`. For most use cases, we recommend installing the individual packages directly from the [@weave-md](https://www.npmjs.com/org/weave-md) organization.
 
 ## Packages
 
@@ -36,7 +36,7 @@ import { extractNodeLinks } from '@weave-md/validate';
 import type { Section, NodeRef } from '@weave-md/core';
 
 // Or import from umbrella package (namespaced)
-import { parse, validate, core, basic } from 'weave-md';
+import { core, parse, validate, basic } from 'weave-md';
 
 const ast = parse.parseWeaveDocument(markdown);
 const { links, errors } = validate.extractNodeLinks(markdown);

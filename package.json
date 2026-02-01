@@ -1,6 +1,6 @@
 {
   "name": "weave-md",
-  "version": "0.3.1-alpha.0",
+  "version": "0.5.0",
   "description": "Markdown flavor for inline, expandable references",
   "type": "module",
   "private": true,
@@ -23,7 +23,7 @@
     "url": "https://github.com/weavepage/weave-md.git"
   },
   "devDependencies": {
-    "@types/node": "^20.19.27",
+    "@types/node": "^20.19.30",
     "@weave-md/basic": "workspace:*",
     "@weave-md/core": "workspace:*",
     "@weave-md/parse": "workspace:*",
@@ -31,7 +31,7 @@
     "@weave-md/validate": "workspace:*",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "typescript": "^5.3.0",
-    "vitest": "^4.0.16"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }

@@ -62,7 +62,7 @@ Conformance tests in `conformance/` define correct behavior.
 
 ## Stability
 
-Version **0.3.1-alpha** — APIs and spec subject to change.
+Version **0.5.0** — APIs and spec subject to change.
 
 ## License
 

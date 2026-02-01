@@ -1,6 +1,6 @@
 {
   "name": "weave-md",
-  "version": "0.3.1-alpha.0",
+  "version": "0.5.0",
   "description": "Weave Markdown - inline, expandable references for markdown. Umbrella package for @weave-md/* packages.",
   "type": "module",
   "main": "dist/index.js",

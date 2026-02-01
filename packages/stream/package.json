@@ -1,6 +1,6 @@
 {
   "name": "@weave-md/stream",
-  "version": "0.3.1-alpha.0",
+  "version": "0.5.0",
   "description": "Lightweight utilities for parsing and rendering streamed Weave content",
   "type": "module",
   "main": "dist/index.js",

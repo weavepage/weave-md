@@ -1,4 +1,4 @@
-# Weave Markdown Specification v0.1
+# Weave Markdown Specification v0.5.0
 
 ## Overview
 
@@ -31,4 +31,4 @@ See [conformance.md](conformance.md) for details on conformance testing.
 
 ## Version
 
-Version **0.1.0** of the Weave Markdown specification.
+Version **0.5.0** of the Weave Markdown specification.
