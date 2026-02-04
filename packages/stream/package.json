@@ -49,7 +49,7 @@
     "markdown-it": "^14.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "typescript": "^5.0.0",
+    "typescript": "^5.7.0",
     "vite": "^5.0.0"
   },
   "keywords": [
