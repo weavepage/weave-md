@@ -45,7 +45,7 @@ export interface WeaveLinkPluginOptions {
  * 
  * @example
  * import MarkdownIt from 'markdown-it'
- * import { weaveLinkPlugin } from '@weave-md/weave-link/markdown-it'
+ * import { weaveLinkPlugin } from '@weave-md/stream/markdown-it'
  * 
  * const md = new MarkdownIt()
  * md.use(weaveLinkPlugin)

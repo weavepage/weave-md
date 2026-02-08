@@ -1,4 +1,4 @@
-// React components for @weave-md/weave-link
+// React components for @weave-md/stream
 
 // Core component
 export { WeaveLink } from './WeaveLink.js'

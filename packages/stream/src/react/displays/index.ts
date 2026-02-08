@@ -1,5 +1,5 @@
-// Display components for @weave-md/weave-link
-// Note: These are re-exported from '@weave-md/weave-link/react' for convenience
+// Display components for @weave-md/stream
+// Note: These are re-exported from '@weave-md/stream/react' for convenience
 
 export { Overlay } from './Overlay.js'
 export { Footnotes, FootnoteRef } from './Footnotes.js'

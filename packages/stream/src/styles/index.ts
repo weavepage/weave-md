@@ -1,4 +1,4 @@
-// Styles API for @weave-md/weave-link
+// Styles API for @weave-md/stream
 
 // Theming utilities
 export { getStyles, injectStyles, getScopedStyles } from './theme.js'
