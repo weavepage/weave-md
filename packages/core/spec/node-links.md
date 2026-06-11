@@ -102,13 +102,13 @@ Used when inline text is the **explicit affordance**.
 ```
 
 - Trigger may be hover, click, focus, or tap (renderer-defined and device-appropriate)
-- Renderer must supply an affordance for anchor-only references
+- Renderer MUST supply an affordance for anchor-only references
 
 ---
 
 ## 5. Inline Node
 
-**In-flow expandable content (single level).**
+**In-flow expandable content.**
 
 ```md
 [Show details](node:details?display=inline)
@@ -116,7 +116,7 @@ Used when inline text is the **explicit affordance**.
 ```
 
 - Always collapsible / expandable
-- Renderer must supply an affordance for anchor-only references
+- Renderer MUST supply an affordance for anchor-only references
 - Content participates in document flow
 
 ---
@@ -132,7 +132,7 @@ Used when inline text is the **explicit affordance**.
 
 - Always expandable / collapsible
 - Supports nesting
-- Renderer must supply an affordance for anchor-only references
+- Renderer MUST supply an affordance for anchor-only references
 - Mobile fallback may be required
 
 ---
@@ -149,7 +149,7 @@ Used when inline text is the **explicit affordance**.
 - No browser navigation — content appears on the current page
 - View persists until explicitly dismissed or collapsed
 - Size and presentation are renderer-defined
-- Renderer must supply an affordance for anchor-only references
+- Renderer MUST supply an affordance for anchor-only references
 - Mobile fallback required
 
 ---
@@ -165,6 +165,19 @@ Used when inline text is the **explicit affordance**.
 | inline | no | Renderer supplies expander | In-flow expandable block |
 | stretch | no | Renderer supplies expander | Nested expandable block |
 | panel | no | Renderer supplies affordance | Persistent section view |
+
+---
+
+## Nesting
+
+Node content can itself contain node links. Nesting is always syntactically valid; whether a nested reference stays interactive depends on its container:
+
+- A renderer that cannot honor a nested reference's display type MUST degrade it to its text content (anchor-only references degrade to nothing) — never a broken trigger, error, or plain hyperlink
+- `sidenote` and `margin` are defined relative to the top-level document flow; renderers SHOULD degrade them inside expanded node content
+- Renderers SHOULD degrade `footnote` references nested inside conditionally rendered containers — `overlay`, `inline`, `stretch`, and `panel`, whose content is mounted only on activation — because lazy mounting breaks numbering and round-trips; they SHOULD remain live inside unconditionally rendered containers — `footnote`, `sidenote`, and `margin` content, which is always present
+- `overlay`, `inline`, `stretch`, and `panel` SHOULD remain interactive when nested, with these rules applying recursively
+
+Which containers count as conditional beyond this is renderer-defined.
 
 ---
 
