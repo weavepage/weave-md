@@ -2,7 +2,15 @@ export { parseMdast, stringifyMdast } from './mdast.js'
 export { parseToMdast, parseWeaveDocument, parseWeaveDocumentAsync } from './parser.js'
 export { stringifyWeaveDocument } from './stringify.js'
 export { compileToWeaveAst, stripDebugInfoFromAst } from './compile.js'
+export { flattenWeaveDocument, recordsToJsonl, recordsToMarkdown } from './flatten.js'
 export { WeaveParseError, WeaveDiagnosticsError } from './types.js'
+export type {
+  FlattenFile,
+  FlattenLink,
+  FlattenRecord,
+  FlattenResult,
+  FlattenOptions
+} from './flatten.js'
 export type {
   WeavePlugin,
   WeaveExtension,
